@@ -1,0 +1,47 @@
+<html>
+<header><title>This is title</title></header>
+<body>
+
+
+
+</body>
+</html>
+
+
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th colspan="2">Ola Graficos</th>
+  </tr>
+  <tr>
+    <td>
+<!--{% if latest_question_list %}
+    <ul>
+      
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question }}</a></li>
+    {% endfor %}
+      
+
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+-->
+    </td>
+    <td> 
+
+{% if first_name %}
+
+    {% for shero in first_name %}
+        Ola {{ shero }}, tudo bem?
+    {% endfor %}
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+	</td>
+    <td>55577855</td>
+  </tr>
+</table>
