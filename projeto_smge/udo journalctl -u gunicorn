@@ -1,0 +1,20 @@
+[0;1;32m●[0m gunicorn.service - gunicorn daemon
+   Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+   Active: [0;1;32mactive (running)[0m since Fri 2017-09-01 18:24:36 UTC; 1 weeks 4 days ago
+ Main PID: 11355 (gunicorn)
+   CGroup: /system.slice/gunicorn.service
+           ├─11355 /home/bussola/myproject/myprojectenv/bin/python3 /home/bussola/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/bussola/myproject/myproject.sock myproject.wsgi:application
+           ├─11359 /home/bussola/myproject/myprojectenv/bin/python3 /home/bussola/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/bussola/myproject/myproject.sock myproject.wsgi:application
+           ├─11361 /home/bussola/myproject/myprojectenv/bin/python3 /home/bussola/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/bussola/myproject/myproject.sock myproject.wsgi:application
+           └─11362 /home/bussola/myproject/myprojectenv/bin/python3 /home/bussola/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/bussola/myproject/myproject.sock myproject.wsgi:application
+
+Sep 12 17:51:47 localhost gunicorn[11355]: b'' - - [12/Sep/2017:17:51:47 +0000] "GET /admin/login/?next=/admin/ HTTP/1.0" 200 1650 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+Sep 12 18:15:48 localhost gunicorn[11355]: b'' - - [12/Sep/2017:18:15:48 +0000] "GET / HTTP/1.0" 200 1716 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+Sep 12 18:21:22 localhost gunicorn[11355]: b'' - - [12/Sep/2017:18:21:22 +0000] "GET / HTTP/1.0" 200 1716 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+Sep 13 04:11:07 localhost gunicorn[11355]: b'' - - [13/Sep/2017:04:11:07 +0000] "GET / HTTP/1.0" 200 1716 "-" "python-requests/2.8.1"
+Sep 13 07:25:23 localhost gunicorn[11355]: b'' - - [13/Sep/2017:07:25:23 +0000] "GET / HTTP/1.0" 200 1716 "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)"
+Sep 13 12:02:26 localhost gunicorn[11355]: b'' - - [13/Sep/2017:12:02:26 +0000] "GET / HTTP/1.0" 200 1716 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+Sep 13 14:42:15 localhost gunicorn[11355]: b'' - - [13/Sep/2017:14:42:15 +0000] "GET / HTTP/1.0" 200 1716 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+Sep 13 15:13:39 localhost systemd[1]: Started gunicorn daemon.
+Sep 13 15:14:16 localhost systemd[1]: Started gunicorn daemon.
+Sep 13 15:26:41 localhost systemd[1]: Started gunicorn daemon.

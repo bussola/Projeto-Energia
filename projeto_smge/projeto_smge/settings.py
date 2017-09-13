@@ -25,7 +25,7 @@ SECRET_KEY = 'yp^0acn$=^h+-jc--55e96r_am1yc06*+@ww_v4g3b*)0az+l)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['50.116.54.138']
 
 # Application definition
 
@@ -125,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/login'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
