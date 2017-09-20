@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="{% static 'dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'dashboard/bower_components/font-awesome/css/font-awesome.min.css' %}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{% static 'dashboard/bower_components/Ionicons/css/ionicons.min.css' %}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'dashboard/dist/css/AdminLTE.css' %}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -21,16 +19,12 @@
     <link rel="stylesheet" href="{% static 'dashboard/dist/css/skins/skin-blue.css' %}">
     <!-- Morris chart -->
     <link rel="stylesheet" href="{% static 'dashboard/bower_components/morris.js/morris.css' %}">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="{% static 'dashboard/bower_components/jvectormap/jquery-jvectormap.css' %}">
     <!-- Date Picker -->
     <link rel="stylesheet"
           href="{% static 'dashboard/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
     <!-- Daterange picker -->
     <link rel="stylesheet"
           href="{% static 'dashboard/bower_components/bootstrap-daterangepicker/daterangepicker.css' %}">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="{% static 'dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +71,8 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle"
+                                                <img src="{% static 'dashboard/dist/img/user4-128x128.jpg' %}"
+                                                     class="img-circle"
                                                      alt="">
                                             </div>
                                             <h4>
@@ -91,7 +86,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle"
+                                                <img src="{% static 'dashboard/dist/img/user3-128x128.jpg' %}"
+                                                     class="img-circle"
                                                      alt="">
                                             </div>
                                             <h4>
@@ -104,7 +100,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle"
+                                                <img src="{% static 'dashboard/dist/img/user1-128x128.jpg' %}"
+                                                     class="img-circle"
                                                      alt="">
                                             </div>
                                             <h4>
@@ -288,7 +285,7 @@
                     </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
-                        <a href="#" data-toggle="control -sidebar"><i class="fa fa-gears"></i></a>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
@@ -324,14 +321,14 @@
                 <li class="header">MENU PRINCIPAL</li>
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <i class="fa fa-area-chart"></i> <span>Dashboard</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Consumo Geral</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Consumo Isolado</a></li>
+                        <li class="active"><a href="index.html"><i class="fa fa-pie-chart"></i> Consumo Geral</a></li>
+                        <li><a href="index2.html"><i class="fa fa-bar-chart"></i> Consumo Isolado</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -339,7 +336,7 @@
                         <i class="fa fa-files-o"></i>
                         <span>Documentos</span>
                         <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">2</span>
             </span>
                     </a>
                     <ul class="treeview-menu">
@@ -349,8 +346,8 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-th"></i>
-                            <span>Equipamentos</span>
+                        <i class="fa fa-bolt"></i>
+                        <span>Equipamentos</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-green">10</small>
                         </span>
@@ -358,7 +355,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-pie-chart"></i>
+                        <i class="fa fa-dashboard"></i>
                         <span>Transdutores</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
@@ -420,16 +417,16 @@
         <div class="tab-content">
             <!-- Home tab content -->
             <div class="tab-pane" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <h3 class="control-sidebar-heading">Atividades Recentes</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript:void(0)">
                             <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                <h4 class="control-sidebar-subheading">Aniversario Chef</h4>
 
-                                <p>Will be 23 on April 24th</p>
+                                <p>Será dia 24 de outubro</p>
                             </div>
                         </a>
                     </li>
@@ -438,9 +435,9 @@
                             <i class="menu-icon fa fa-user bg-yellow"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                <h4 class="control-sidebar-subheading">Cliente atualizou seu perfil</h4>
 
-                                <p>New phone +1(800)555-1234</p>
+                                <p>Novo telefone (17)555-1234</p>
                             </div>
                         </a>
                     </li>
@@ -449,9 +446,9 @@
                             <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                                <h4 class="control-sidebar-subheading">Miguel alterou seu email</h4>
 
-                                <p>nora@example.com</p>
+                                <p>miguel@example.com</p>
                             </div>
                         </a>
                     </li>
@@ -460,21 +457,21 @@
                             <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                                <h4 class="control-sidebar-subheading">233 Leituras Executadas</h4>
 
-                                <p>Execution time 5 seconds</p>
+                                <p>Executadas 233 leituras de 5 seg.</p>
                             </div>
                         </a>
                     </li>
                 </ul>
                 <!-- /.control-sidebar-menu -->
 
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <h3 class="control-sidebar-heading">Progresso das Tarefas</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript:void(0)">
                             <h4 class="control-sidebar-subheading">
-                                Custom Template Design
+                                Reconfigurar transdutor [cliente 1]
                                 <span class="label label-danger pull-right">70%</span>
                             </h4>
 
@@ -486,7 +483,7 @@
                     <li>
                         <a href="javascript:void(0)">
                             <h4 class="control-sidebar-subheading">
-                                Update Resume
+                                Atualizar resumo
                                 <span class="label label-success pull-right">95%</span>
                             </h4>
 
@@ -498,7 +495,7 @@
                     <li>
                         <a href="javascript:void(0)">
                             <h4 class="control-sidebar-subheading">
-                                Laravel Integration
+                                Migração para novos equipamentos
                                 <span class="label label-warning pull-right">50%</span>
                             </h4>
 
@@ -510,7 +507,7 @@
                     <li>
                         <a href="javascript:void(0)">
                             <h4 class="control-sidebar-subheading">
-                                Back End Framework
+                                Instalação e testes
                                 <span class="label label-primary pull-right">68%</span>
                             </h4>
 
@@ -525,7 +522,7 @@
             </div>
             <!-- /.tab-pane -->
             <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <div class="tab-pane" id="control-sidebar-stats-tab">Status do conteudo das tabs</div>
             <!-- /.tab-pane -->
             <!-- Settings tab content -->
             <div class="tab-pane" id="control-sidebar-settings-tab">
@@ -613,28 +610,20 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 
-
-
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 <!-- Morris.js charts -->
 <script src="{% static 'dashboard/bower_components/raphael/raphael.min.js' %}"></script>
 <script src="{% static 'dashboard/bower_components/morris.js/morris.min.js' %}"></script>
 <!-- Sparkline -->
 <script src="{% static 'dashboard/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
-<!-- jvectormap -->
-<script src="{% static 'dashboard/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
-<script src="{% static 'dashboard/plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{% static 'dashboard/bower_components/jquery-knob/dist/jquery.knob.min.js' %}"></script>
 <!-- daterangepicker -->
-<script src="{% static 'dashboard/bower_components/moment/min/moment.min.js' %}"></script>
 <script src="{% static 'dashboard/bower_components/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
 <!-- datepicker -->
 <script src="{% static 'dashboard/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{% static 'dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js' %}"></script>
 <!-- Slimscroll -->
 <script src="{% static 'dashboard/bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
 <!-- FastClick -->
