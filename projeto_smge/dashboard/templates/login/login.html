@@ -1,22 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'login/base.html' %}
+{% load staticfiles %}
 {% block content %}
-
-<form action="{% url 'login:login' %}" class="form-signin" method="post">
-	{% csrf_token %}
-	<h2 class="form-signin-heading">Login</h2>
-	
-	<div class="form-group">
-		<div class="col-md-4">
-			<input type="text" name="username" class="form-control" placeholder="Login">
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<div class="col-md-4">
-			<input type="password" name="password" class="form-control" placeholder="Senha">
-		</div>
-	</div>
-	
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<form action="{% url 'dashboard:login' %}" class="form-signin" method="post">
+    {% csrf_token %}
+    <div class="con tainer">
+        <img class="logo" src="{% static 'dashboard/img/esave/esave.png' %}"><br>
+        <div class="titulo">Bem-vindo</div>
+        <br>
+        <input id="input" name="username" placeholder="Email" class="email" type="email"><br>
+        <input id="input" name="password" placeholder="Senha" class="password" type="password"><br>
+        <button href="#" class="botao">Entrar</button>
+        <br>
+        <input id="lembrar" class="checkbox" placeholder="Lembrar" type="checkbox">
+        <label for="lembrar">Lembrar</label>
+        <a class="esqueceu" href="">Esqueceu a senha?</a>
+    </div>
 </form>
 {% endblock %}
