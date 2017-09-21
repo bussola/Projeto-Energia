@@ -313,7 +313,7 @@
                 <div class="pull-left info">
                     {% if user.is_authenticated %}
 						{% if user.first_name %}
-							<p>{{user.first_name}}</p>
+							<p>{{user.first_name}} {{user.last_name}}</p>
 						{% else %}
 							<p>{{ user.get_username }}</p>
 						{% endif %}
