@@ -247,9 +247,13 @@
                             <img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt="">
                             <span class="hidden-xs">
 								{% if user.is_authenticated %}
-									<b>{{ user.get_username }}</b>
+									{% if user.first_name %}
+										{{user.first_name}}
+									{% else %}
+										{{ user.get_username }}
+									{% endif %}
 								{% else %}
-									Please log in.
+									Faça o login
 								{% endif %}
 							</span>
                         </a>
@@ -308,9 +312,13 @@
                 </div>
                 <div class="pull-left info">
                     {% if user.is_authenticated %}
-						<p>{{ user.get_username }}</p>
+						{% if user.first_name %}
+							<p>{{user.first_name}}</p>
+						{% else %}
+							<p>{{ user.get_username }}</p>
+						{% endif %}
 					{% else %}
-						Please log in.
+						<p>Faça o login</p>
 					{% endif %}
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
