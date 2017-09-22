@@ -246,12 +246,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<!-- <img src="avatars/{{ user.get_profile.avatar }}">
 							<img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt=""> -->
-							<img src="{{ user.avatar }}" class="user-image" alt="">                            
+							<img src="/{{ user.avatar }}" class="user-image" alt="">                            
 							
                             <span class="hidden-xs">
 								{% if user.is_authenticated %}
 									{% if user.first_name %}
-										{{user.first_name}}
+										<p>{{user.first_name}}</p>
+										{{ user.avatar }}
 									{% else %}
 										{{ user.get_username }}
 									{% endif %}
@@ -267,7 +268,7 @@
 								<img src="{{ user.avatar }}" class="user-image" alt="">
 
                                 <p>
-                                    Bruno Drago - Consultor
+                                    {{user.first_name}} {{user.last_name}}
                                     <small>Membro desde Nov. 2015</small>
                                 </p>
                             </li>
