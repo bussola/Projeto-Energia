@@ -27,9 +27,6 @@ $(function () {
     zIndex              : 999999
   });
 
-  // bootstrap WYSIHTML5 - text editor
-  $('.textarea').wysihtml5();
-
   $('.daterange').daterangepicker({
     ranges   : {
       'Today'       : [moment(), moment()],
