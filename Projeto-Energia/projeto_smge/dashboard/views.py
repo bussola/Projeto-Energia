@@ -47,10 +47,15 @@ def graficos(request):
 
 
 def do_login(request):
-    # return render(request, 'dashboard/home.html')
+    if request.method == 'GET':
+        if request.user.is_authenticated():
+            return render(request, 'dashboard/graficos.html')
+
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
+            if request.POST.get('lembrar', None) is not None:
+                request.session.set_expiry(60*60*24*30) # Se selecionar o "lembrar-me" ficará logado por 1 mes
             login(request, user)
             return redirect('/graficos')
     return render(request, 'dashboard/login.html')

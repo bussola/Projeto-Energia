@@ -105,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SESSION_COOKIE_AGE = 60 * 60 * 2 # ficará logado por 2 horas
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
