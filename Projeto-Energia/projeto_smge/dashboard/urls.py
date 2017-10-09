@@ -3,12 +3,17 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-	
-	url(r'^graficos$', views.graficos, name='graficos'),
+
     url(r'^login$', views.do_login, name='login'),
 	url(r'^logout$', views.do_logout, name='logout'),
-    url(r'^departamentos_json', views.departamentos_json, name='departamentos_json'),
-    url(r'^transdutores_json', views.transdutores_json, name='transdutores_json'),
+
+	url(r'^graficos$', views.graficos, name='graficos'),
+
+    url(r'^consumo_mensal', views.consumo_mensal, name='consumo_mensal'),
+    url(r'^consumomensalporsetor', views.consumo_mensal_setores, name='consumo_mensal_setores'),
+    url(r'^gasto_mensal', views.gasto_mensal, name='gasto_mensal'),
+    url(r'^gastomensalporsetor', views.gasto_mensal_por_setor, name='gasto_mensal_por_setor'),
+
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 
     # ex: /polls/5/

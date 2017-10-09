@@ -2,141 +2,121 @@
 
 {% load static %}
 
-<link href="{% static 'dashboard/bower_components/morris.js/morris.css' %}" rel="stylesheet">
-
 {% block content %}
 <div class="content">
-    <div class="col-md-6">
-        <div class="panel panel-success">
-            <div class="panel-heading text-center">
-                <h3>Consumo por Departamento</h3>
-            </div>
-            <div class="panel-body">
-                <div id="chartDepartamentos" style="height: 250px;"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
+      <!-- CONSUMO MENSAL --------------------------------------------- -->
+      <div class="col-md-8">
         <div class="panel">
             <div class="panel-heading text-center">
-                <h3>Horários de Ponta</h3>
+                <h3 class="text-primary">Consumo Mensal (Kwa)</h3>
             </div>
             <div class="panel-body">
-                <div id="chartHorarios" style="height: 250px;"></div>
+                <div id="chartConsumoMensal" style="height: 250px;"></div>
             </div>
         </div>
     </div>
-
-    <div class="col-md-12">
-
-    <div class="panel panel-primary" class="col-md-12">
-        <div class="panel-heading text-center">
-            <h3>Consumo por Transdutor</h3>
-        </div>
-        <div class="panel-body">
-            <div id="chartTransdutores" style="height: 350px;"></div>
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Consumo por Setor (Kwa)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartConsumoMensalSetores" style="height: 250px;"></div>
+            </div>
         </div>
     </div>
+    <div class="col-md-8">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Gasto Mensal (R$)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartGastoMensal" style="height: 250px;"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Gasto Mensal por Setor (R$)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartGastoMensalSetores" style="height: 250px;"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 {% endblock %}
 
-<script src="{% static 'dashboard/bower_components/jquery/dist/jquery.min.js' %}"></script>
-<script src="{% static 'dashboard/bower_components/raphael/raphael-min.js' %}"></script>
-<script src="{% static 'dashboard/bower_components/morris.js/morris.min.js' %}"></script>
-<script src="{% static 'dashboard/dist/js/graficos.js' %}"></script>
-
 
 {% block jquery %}
 
-function bindDonut(nome_chart, dados, xkey) {
-Morris.Donut({
-element: nome_chart,
-data: dados,
-backgroundColor: '#ccc',
-labelColor: '#060',
-colors: [
-'#0BA462',
-'#39B580',
-'#67C69D',
-'#95D7BB'
-],
-xkey: xkey,
-formatter: function (x) { return x + "%"}
-});
-}
 
-function bindLinesTransdutores(nome_chart, dados) {
-Morris.Line({
-element: nome_chart,
-data: dados,
-xkey: 'Hora',
-ykeys: ['t1', 't2', 't3', 't4'],
-labels: ['Transdutor 1', 'Transdutor 2', 'Transdutor 3', 'Transdutor 4'],
-parseTime: false
-});
-}
-
-function bindBar(nome_chart, dados) {
-Morris.Bar({
-element: nome_chart,
-data: dados,
-xkey: 'ano',
-ykeys: ['ponta', 'normal'],
-labels: ['Horário Normal', 'Horário Ponta']
-});
-
-}
-
-
-// ---------------------------------- DADOS JSON
+// ---------------------------------- CONSUMO MENSAL
 $.ajax({
-method: 'GET',
-url: '/departamentos_json/',
-dataType: 'json',
-contentType: "application/json; charset=utf-8",
-success: function(data) {
-console.log('ok depto json');
-bindDonut('chartDepartamentos', data, 'label');
-},
-error: function(error_data){
-console.log('erro');
-console.log(error_data);
-}
+    method: 'GET',
+    url: '/consumo_mensal/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        xKey = 'Dia';
+        yKeys = ['Consumo'];
+        labels = ['Consumo'];
+        bindBar('chartConsumoMensal', data, xKey, yKeys, labels);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
 });
 
-// ---------------------------------- DADOS VIA REST
+
+// ---------------------------------- CONSUMO MENSAL P/ SETOR
 $.ajax({
-method: 'GET',
-url: 'horarios_rest',
-dataType: 'json',
-contentType: "application/json; charset=utf-8",
-success: function(data) {
-console.log('ok horarios_rest');
-bindBar('chartHorarios', data);
-},
-error: function(error_data){
-console.log('erro rest');
-console.log(error_data);
-}
+    method: 'GET',
+    url: '/consumomensalporsetor/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        bindDonut('chartConsumoMensalSetores', data);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
 });
 
-// Transdutores (Json) ---------------------------------------
+
+// ---------------------------------- GASTO MENSAL
 $.ajax({
-method: 'GET',
-url: '/transdutores_json/',
-dataType: 'json',
-contentType: "application/json; charset=utf-8",
-success: function(data) {
-console.log('ok transdutores-json');
-bindLinesTransdutores('chartTransdutores', data);
-},
-error: function(error_data){
-console.log('erro trans');
-console.log(error_data);
-}
+    method: 'GET',
+    url: '/gasto_mensal/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        xKey = 'Dia';
+        yKeys = ['Valor'];
+        labels = ['Valor'];
+        bindLines('chartGastoMensal', data, xKey, yKeys, labels);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
+});
+
+
+// ---------------------------------- GASTO MENSAL P/ SETOR
+$.ajax({
+    method: 'GET',
+    url: '/gastomensalporsetor/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        bindDonut('chartGastoMensalSetores', data);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
 });
 
 {% endblock %}

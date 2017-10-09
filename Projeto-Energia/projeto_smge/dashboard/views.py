@@ -67,46 +67,98 @@ def do_logout(request):
     return redirect('/login')
 
 
-def departamentos_json(request, *args, **kargs):
-    # Substituiremos pelos dados do banco (models), isso é apenas demonstração
-    data = [
-        {'value': 70, 'label': 'Industria'},
-        {'value': 15, 'label': 'Oficina'},
-        {'value': 10, 'label': 'Suprimento'},
-        {'value': 5, 'label': 'Outros Departamentos'}
+def consumo_mensal(request, *args, **kargs):
+    data1 = [
+        {'Dia': '01', 'Consumo': 51333},
+        {'Dia': '02', 'Consumo': 30222},
+        {'Dia': '03', 'Consumo': 20442},
+        {'Dia': '04', 'Consumo': 20123},
+        {'Dia': '05', 'Consumo': 32333},
+        {'Dia': '06', 'Consumo': 44963},
+        {'Dia': '07', 'Consumo': 42124},
+        {'Dia': '08', 'Consumo': 52322},
+        {'Dia': '09', 'Consumo': 62223},
+        {'Dia': '10', 'Consumo': 82111},
+        {'Dia': '11', 'Consumo': 92223},
+        {'Dia': '12', 'Consumo': 92099},
+        {'Dia': '13', 'Consumo': 82724},
+        {'Dia': '14', 'Consumo': 66875},
+        {'Dia': '15', 'Consumo': 42312},
+        {'Dia': '16', 'Consumo': 32222},
+        {'Dia': '17', 'Consumo': 22222},
+        {'Dia': '18', 'Consumo': 12222},
+        {'Dia': '19', 'Consumo': 32222},
+        {'Dia': '20', 'Consumo': 42222},
+        {'Dia': '21', 'Consumo': 52222},
+        {'Dia': '22', 'Consumo': 62222},
+        {'Dia': '23', 'Consumo': 72222},
+        {'Dia': '24', 'Consumo': 72222},
+        {'Dia': '25', 'Consumo': 62222},
+        {'Dia': '26', 'Consumo': 52222},
+        {'Dia': '27', 'Consumo': 42222},
+        {'Dia': '28', 'Consumo': 32222},
+        {'Dia': '29', 'Consumo': 22222},
+        {'Dia': '30', 'Consumo': 12222},
+        {'Dia': '31', 'Consumo': 12222},
     ]
-    return JsonResponse(data, safe=False)
+    return JsonResponse(data1, safe=False)
 
 
-def transdutores_json(request, *args, **kargs):
-    # Substituiremos pelos dados do banco (models), isso é apenas demonstração
-    data = [
-        {'Hora': '00:00', 't1': 51, 't2': 55, 't3': 31, 't4': 66},
-        {'Hora': '01:00', 't1': 51, 't2': 55, 't3': 33, 't4': 67},
-        {'Hora': '02:00', 't1': 50, 't2': 40, 't3': 33, 't4': 67},
-        {'Hora': '03:00', 't1': 53, 't2': 55, 't3': 23, 't4': 68},
-        {'Hora': '04:00', 't1': 50, 't2': 40, 't3': 39, 't4': 68},
-        {'Hora': '05:00', 't1': 53, 't2': 55, 't3': 44, 't4': 60},
-        {'Hora': '06:00', 't1': 44, 't2': 55, 't3': 44, 't4': 71},
-        {'Hora': '07:00', 't1': 56, 't2': 55, 't3': 41, 't4': 71},
-        {'Hora': '08:00', 't1': 44, 't2': 65, 't3': 41, 't4': 75},
-        {'Hora': '09:00', 't1': 44, 't2': 65, 't3': 41, 't4': 81},
-        {'Hora': '10:00', 't1': 48, 't2': 65, 't3': 41, 't4': 87},
-        {'Hora': '11:00', 't1': 49, 't2': 72, 't3': 41, 't4': 87},
-        {'Hora': '12:00', 't1': 55, 't2': 72, 't3': 42, 't4': 92},
-        {'Hora': '13:00', 't1': 55, 't2': 73, 't3': 41, 't4': 92},
-        {'Hora': '14:00', 't1': 55, 't2': 74, 't3': 33, 't4': 95},
-        {'Hora': '15:00', 't1': 66, 't2': 75, 't3': 31, 't4': 97},
-        {'Hora': '16:00', 't1': 55, 't2': 88, 't3': 31, 't4': 99},
-        {'Hora': '17:00', 't1': 55, 't2': 88, 't3': 25, 't4': 99},
-        {'Hora': '18:00', 't1': 55, 't2': 89, 't3': 25, 't4': 99},
-        {'Hora': '19:00', 't1': 65, 't2': 77, 't3': 25, 't4': 100},
-        {'Hora': '20:00', 't1': 67, 't2': 76, 't3': 24, 't4': 100},
-        {'Hora': '21:00', 't1': 77, 't2': 76, 't3': 24, 't4': 100},
-        {'Hora': '22:00', 't1': 75, 't2': 75, 't3': 21, 't4': 100},
-        {'Hora': '23:00', 't1': 82, 't2': 65, 't3': 21, 't4': 100},
-        {'Hora': '24:00', 't1': 85, 't2': 65, 't3': 19, 't4': 100}
+def consumo_mensal_setores(request, *args, **kargs):
+    data2 = [
+        {'value': 2554, 'label': 'Industria'},
+        {'value': 242, 'label': 'Oficina'},
+        {'value': 3233, 'label': 'Suprimento'},
+        {'value': 122, 'label': 'Outros Departamentos'}
     ]
+    return JsonResponse(data2, safe=False)
+
+
+def gasto_mensal(request, *args, **kargs):
+    data3 = [
+        {'Dia': '01', 'Valor': 51333},
+        {'Dia': '02', 'Valor': 30222},
+        {'Dia': '03', 'Valor': 20442},
+        {'Dia': '04', 'Valor': 20123},
+        {'Dia': '05', 'Valor': 32333},
+        {'Dia': '06', 'Valor': 44963},
+        {'Dia': '07', 'Valor': 42124},
+        {'Dia': '08', 'Valor': 52322},
+        {'Dia': '09', 'Valor': 62223},
+        {'Dia': '10', 'Valor': 82111},
+        {'Dia': '11', 'Valor': 92223},
+        {'Dia': '12', 'Valor': 92099},
+        {'Dia': '13', 'Valor': 82724},
+        {'Dia': '14', 'Valor': 66875},
+        {'Dia': '15', 'Valor': 42312},
+        {'Dia': '16', 'Valor': 32222},
+        {'Dia': '17', 'Valor': 22222},
+        {'Dia': '18', 'Valor': 12222},
+        {'Dia': '19', 'Valor': 32222},
+        {'Dia': '20', 'Valor': 42222},
+        {'Dia': '21', 'Valor': 52222},
+        {'Dia': '22', 'Valor': 62222},
+        {'Dia': '23', 'Valor': 72222},
+        {'Dia': '24', 'Valor': 72222},
+        {'Dia': '25', 'Valor': 62222},
+        {'Dia': '26', 'Valor': 52222},
+        {'Dia': '27', 'Valor': 42222},
+        {'Dia': '28', 'Valor': 32222},
+        {'Dia': '29', 'Valor': 22222},
+        {'Dia': '30', 'Valor': 12222},
+        {'Dia': '31', 'Valor': 12222},
+    ]
+    return JsonResponse(data3, safe=False)
+
+
+def gasto_mensal_por_setor(request, *args, **kargs):
+    data = [
+        {'value': 12.22, 'label': 'Industria'},
+        {'value': 15.32, 'label': 'Oficina'},
+        {'value': 12.12, 'label': 'Suprimento'},
+        {'value': 51.30, 'label': 'Outros Departamentos'}
+    ]
+
     return JsonResponse(data, safe=False)
 
 
