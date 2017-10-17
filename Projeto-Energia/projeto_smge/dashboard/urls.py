@@ -10,9 +10,9 @@ urlpatterns = [
 	url(r'^graficos$', views.graficos, name='graficos'),
 
     url(r'^consumo_mensal', views.consumo_mensal, name='consumo_mensal'),
-    url(r'^consumomensalporsetor', views.consumo_mensal_setores, name='consumo_mensal_setores'),
+    url(r'^consumomensalporsetores', views.consumo_mensal_por_setores, name='consumo_mensal_setores'),
     url(r'^gasto_mensal', views.gasto_mensal, name='gasto_mensal'),
-    url(r'^gastomensalporsetor', views.gasto_mensal_por_setor, name='gasto_mensal_por_setor'),
+    url(r'^gastomensalporsetores', views.gasto_mensal_por_setores, name='gasto_mensal_por_setores'),
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 

@@ -104,7 +104,7 @@ def consumo_mensal(request, *args, **kargs):
     return JsonResponse(data1, safe=False)
 
 
-def consumo_mensal_setores(request, *args, **kargs):
+def consumo_mensal_por_setores(request, *args, **kargs):
     data2 = [
         {'value': 2554, 'label': 'Industria'},
         {'value': 242, 'label': 'Oficina'},
@@ -151,7 +151,7 @@ def gasto_mensal(request, *args, **kargs):
     return JsonResponse(data3, safe=False)
 
 
-def gasto_mensal_por_setor(request, *args, **kargs):
+def gasto_mensal_por_setores(request, *args, **kargs):
     data = [
         {'value': 12.22, 'label': 'Industria'},
         {'value': 15.32, 'label': 'Oficina'},
