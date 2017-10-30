@@ -106,7 +106,6 @@ class DevicewiseHttp(object):
             return True
         return False
 
-
     # Checa o comando JSON para o parametro auth. Se não informado será adicionado.
     # @param    mixed    string_json    A JSON string or the dict representation of JSON.
     # @return   string   Uma string JSON com o parametro auth.
@@ -126,3 +125,38 @@ class DevicewiseHttp(object):
         string_json = json.dumps(string_json)
         return string_json
 
+    # Envia a requisição para o servidor e converte a resposta.
+    # @param    mixed    string_json     Comendos JSON e argumentos. Este parametro pode ser um dicionario que será convertido para uma string JSON.
+    # @return   bool     Sucesso ou falha no POST.
+    def postar(self, string_json):
+        '''    # Este metodo envia a requisição para o servidor e converte a resposta.'''
+        self.error = ""
+        self.last_status = True
+        self.last_received = ""
+        self.response = ""
+
+        string_json = self.set_json_auth(string_json)
+        self.last_sent = string_json
+
+        http_obj = Http(disable_ssl_certificate_validation=True)
+        result, self.last_received = http_obj.request(self.endpoint, "POST", string_json)
+        if not result["status"] == "200":
+            raise Exception("Falha no POST para %s" % self.endpoint)
+
+        self.response = json.loads(self.last_received)
+
+        if "errorMessages" in self.response:
+            self.error = self.response["errorMessages"]
+
+        if "success" in self.response:
+            self.last_status = self.response["success"]
+
+        return self.last_status
+
+    # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
+    # @return    dict    Resposta de dados.
+    def obter_resposta(self):
+        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
+        if self.last_status and len(self.response["data"]) > 0:
+            return self.response["data"]
+        return None
