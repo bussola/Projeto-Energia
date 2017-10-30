@@ -41,5 +41,69 @@ class DevicewiseHttp(object):
     # Mantem qualquer erro retornado pela api.
     error = []
 
+    # Inicializa o objeto.
+    # @param    dict    opcoes    Opcoes de inicializacao (endpoint, app_id, app_token, thing_key, username, password, session_id).
+    def __init__(self, opcoes={}):
+        if "endpoint" in opcoes:
+            self.endpoint = opcoes["endpoint"]
 
-   
+        if "app_id" in opcoes:
+            self.app_id = opcoes["app_id"]
+        if "app_token" in opcoes:
+            self.app_token = opcoes["app_token"]
+        if "thing_key" in opcoes:
+            self.thing_key = opcoes["thing_key"]
+
+        if "username" in opcoes:
+            self.username = opcoes["username"]
+        if "password" in opcoes:
+            self.password = opcoes["password"]
+
+        if "session_id" in opcoes:
+            self.session_id = opcoes["session_id"]
+
+        if (len(self.session_id) == 0) or (self.executar("diag.ping") == False):
+            self.session_id = ""
+            self.autenticar()
+
+    # Efetua autenticacao na API. Dependendo da configuração, autentica o aplicativo ou usuário.
+    # @return    bool    Sucesso ou falha na autenticacao.
+    def autenticar(self):
+        """Dependendo da servico, autentica o aplicativo ou usuário."""
+        if len(self.app_id) > 0 and len(self.app_token) > 0 and len(self.thing_key) > 0:
+            return self.autenticar_aplicativo(self.app_id, self.app_token, self.thing_key)
+        elif len(self.username) > 0 and len(self.password) > 0:
+            return self.autenticar_usuario(self.username, self.password)
+        return False
+
+    # Autentica a aplicação
+    # @param     string    app_id                ID da aplicação.
+    # @param     string    app_token             Token da aplicação.
+    # @param     string    thing_key             Chave (key) da aplicação (thing).
+    # @param     bool      update_session_id     Atualiza ID da sessão.
+    # @return    bool      Sucesso ou falha na autenticação.
+    def autenticar_aplicativo(self, app_id, app_token, thing_key, update_session_id=True):
+        """Autentica a aplicação."""
+        params = {"appId": app_id, "appToken": app_token, "thingKey": thing_key}
+        response = self.executar("api.authenticate", params)
+        if response == True:
+            if update_session_id:
+                self.session_id = self.response["auth"]["params"]["sessionId"]
+            return True
+        return False
+
+    # Autentica um usuário.
+    # @param     string    username             Nome do usuario (username).
+    # @param     string    password             Senha de acesso (password).
+    # @param     bool      update_session_id    Atualiza ID da sessão.
+    # @return    bool      Success or failure to authenticate.
+    def autenticar_usuario(self, username, password, update_session_id=True):
+        """Autentica um usuário."""
+        params = {"username": username, "password": password}
+        if self.executar("api.authenticate", params):
+            if update_session_id:
+                self.session_id = self.response["auth"]["params"]["sessionId"]
+            return True
+        return False
+
+
