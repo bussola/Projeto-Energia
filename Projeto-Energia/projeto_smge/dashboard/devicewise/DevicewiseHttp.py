@@ -107,3 +107,22 @@ class DevicewiseHttp(object):
         return False
 
 
+    # Checa o comando JSON para o parametro auth. Se não informado será adicionado.
+    # @param    mixed    string_json    A JSON string or the dict representation of JSON.
+    # @return   string   Uma string JSON com o parametro auth.
+    def informar_auth_json(self, string_json):
+        """Adiciona parametro AUTH caso não informado."""
+        if not type(string_json) is dict:
+            string_json = json.loads(string_json)
+
+        if not "auth" in string_json:
+            if len(self.session_id) == 0:
+                self.autenticar()
+            # levantar exception caso parametro nao informado
+            if len(self.session_id) == 0:
+                raise Exception("Autenticação falhou. Por favor confira as configurações da aplicação.")
+            string_json["auth"] = {"sessionId": self.session_id}
+
+        string_json = json.dumps(string_json)
+        return string_json
+
