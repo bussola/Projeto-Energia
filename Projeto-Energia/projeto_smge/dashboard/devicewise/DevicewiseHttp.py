@@ -160,3 +160,42 @@ class DevicewiseHttp(object):
         if self.last_status and len(self.response["data"]) > 0:
             return self.response["data"]
         return None
+
+    # Empacota o comando e os parametros e envia para o endpoint configurado para processamento.
+    # @param    command    string    Comando da API a ser executado.
+    # @param    params     dict      Parametros do comando.
+    # @return   bool       Sucesso ou falha no POST.
+    def executar(self, command, params=False):
+        """Empacota o comando e os parametros em uma array e envia comando para o endpoint configurado para processamento."""
+        if command == "api.authenticate":
+            parameters = {"auth": {"command": "api.authenticate", "params": params}}
+        else:
+            parameters = {"data": {"command": command}}
+            if not params == False:
+                parameters["data"]["params"] = params
+        return self.postar(parameters)
+
+    # Retorna uma lista de opções. Util para inicialização e objetos existentes de uma sub-classe.
+    # @return    dict    Lista de opções.
+    def obter_opcoes(self):
+        """Retorna uma lista de opções. Util para inicialização e objetos existentes de uma sub-classe."""
+        return {
+            "endpoint": self.endpoint,
+            "session_id": self.session_id,
+            "app_id": self.app_id,
+            "app_token": self.app_token,
+            "thing_key": self.thing_key,
+            "username": self.username,
+            "password": self.password
+        }
+
+    # Retorna uma lista de informações para debug após execução do último comando.
+    # @return    dict    Dados para debug.
+    def debugar(self):
+        """Retorna uma lista de informações para debug após execução do último comando."""
+        return {
+            "endpoint": self.endpoint,
+            "last_sent": self.last_sent,
+            "last_received": self.last_received,
+            "error": self.error
+        }
