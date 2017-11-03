@@ -14,6 +14,10 @@ urlpatterns = [
     url(r'^gasto_mensal', views.gasto_mensal, name='gasto_mensal'),
     url(r'^gastomensalporsetores', views.gasto_mensal_por_setores, name='gasto_mensal_por_setores'),
 
+    url(r'^api_login', views.api_login, name='api_login'),
+    url(r'^api_coletar', views.api_coletar, name='api_coletar'),
+    url(r'^api_coletar_periodo', views.api_coletar_periodo, name='api_coletar_periodo'),
+
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 
     # ex: /polls/5/
