@@ -1,15 +1,15 @@
 from httplib2 import Http
 import simplejson as json
+from django.views.decorators.csrf import csrf_exempt
 
 
 class DevicewiseHttp(object):
     # Mantidas as mesmas nomenclaturas que a API usa
-
     # Endpoint da API (url)
-    endpoint = ""
+    endpoint = 'http://api.devicewise.com/api'
 
     # Identificador da aplicação
-    app_id = ""
+    app_id = "hab0001"
 
     # Token da aplicação
     app_token = ""
@@ -18,10 +18,10 @@ class DevicewiseHttp(object):
     thing_key = ""
 
     # Nome do usuário para conectar no servidor.
-    username = ""
+    username = 'leandro@habeis.com.br'
 
     # Senha para conectar no servidor.
-    password = ""
+    password = 'Hs2017&L'
 
     # String JSON do ultimo recebimento do endpoint. ***Usado para debug.
     last_received = ""
@@ -62,7 +62,7 @@ class DevicewiseHttp(object):
         if "session_id" in opcoes:
             self.session_id = opcoes["session_id"]
 
-        if (len(self.session_id) == 0) or (self.executar("diag.ping") == False):
+        if (len(self.session_id) == 0) or (self.postar("diag.ping") == False):
             self.session_id = ""
             self.autenticar()
 
@@ -84,8 +84,9 @@ class DevicewiseHttp(object):
     # @return    bool      Sucesso ou falha na autenticação.
     def autenticar_aplicativo(self, app_id, app_token, thing_key, update_session_id=True):
         """Autentica a aplicação."""
-        params = {"appId": app_id, "appToken": app_token, "thingKey": thing_key}
-        response = self.executar("api.authenticate", params)
+        string_json = {"auth": {"command": "api.authenticate",
+                         "params": {"appId": app_id, "appToken": app_token, "thingKey": thing_key}}}
+        response = self.postar(string_json)
         if response == True:
             if update_session_id:
                 self.session_id = self.response["auth"]["params"]["sessionId"]
@@ -97,10 +98,11 @@ class DevicewiseHttp(object):
     # @param     string    password             Senha de acesso (password).
     # @param     bool      update_session_id    Atualiza ID da sessão.
     # @return    bool      Success or failure to authenticate.
+    @csrf_exempt
     def autenticar_usuario(self, username, password, update_session_id=True):
         """Autentica um usuário."""
-        params = {"username": username, "password": password}
-        if self.executar("api.authenticate", params):
+        string_json = {"auth": {"command": "api.authenticate", "params": {"username": username, "password": password}}}
+        if self.postar(string_json):
             if update_session_id:
                 self.session_id = self.response["auth"]["params"]["sessionId"]
             return True
@@ -135,7 +137,7 @@ class DevicewiseHttp(object):
         self.last_received = ""
         self.response = ""
 
-        string_json = self.set_json_auth(string_json)
+        string_json = self.informar_auth_json(string_json)
         self.last_sent = string_json
 
         http_obj = Http(disable_ssl_certificate_validation=True)
@@ -151,29 +153,26 @@ class DevicewiseHttp(object):
         if "success" in self.response:
             self.last_status = self.response["success"]
 
+            # for key, value in self.response.items():
+            # print(key, value)
+
         return self.last_status
 
     # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
     # @return    dict    Resposta de dados.
     def obter_resposta(self):
         """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
-        if self.last_status and len(self.response["data"]) > 0:
-            return self.response["data"]
+        if self.last_status and len(self.response['dados']['params']['properties']) > 0:
+            return self.response['dados']['params']['properties']
         return None
 
-    # Empacota o comando e os parametros e envia para o endpoint configurado para processamento.
-    # @param    command    string    Comando da API a ser executado.
-    # @param    params     dict      Parametros do comando.
-    # @return   bool       Sucesso ou falha no POST.
-    def executar(self, command, params=False):
-        """Empacota o comando e os parametros em uma array e envia comando para o endpoint configurado para processamento."""
-        if command == "api.authenticate":
-            parameters = {"auth": {"command": "api.authenticate", "params": params}}
-        else:
-            parameters = {"data": {"command": command}}
-            if not params == False:
-                parameters["data"]["params"] = params
-        return self.postar(parameters)
+    # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
+    # @return    dict    Resposta de dados.
+    def obter_transdutores(self):
+        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
+        if self.last_status and len(self.response['dados']['params']['properties']) > 0:
+            return self.response['dados']['params']['properties']
+        return None
 
     # Retorna uma lista de opções. Util para inicialização e objetos existentes de uma sub-classe.
     # @return    dict    Lista de opções.
@@ -199,3 +198,25 @@ class DevicewiseHttp(object):
             "last_received": self.last_received,
             "error": self.error
         }
+
+    # Formata objeto datetime para formato requerido pela API.
+    # @param     datetime    data   Objeto datetime que será reformatado.
+    # @return    string      A data formatada no estilo requerido pela API.
+    def formatar_datatime(self, data):
+        """Converte uma string de dados para formato da API."""
+        if type(data) is str:
+            return data
+        else:
+            data_string = data.strftime("%Y-%m-%dT%H:%M:%S%z")
+            data_formatada = data_string[:-2] + ':' + data_string[-2:]  # 2004-02-12T15:19:21+00:00
+            return data_formatada
+
+    # Executa o metodo 'thing.find'.
+    # @param     thing_key   Codigo de identificacao do cliente.
+    # @return    string      Json contento coletas encontradas.
+    def achar(self, thing_key):
+        json = {'auth': {'sessionId': self.session_id}, 'dados': {'command': 'thing.find', 'params': {'key': thing_key}}}
+        print('Devicewise.ACHAR----------------------------  ' + str(json))
+        if self.postar(json):
+            return self.obter_transdutores()
+        return None
