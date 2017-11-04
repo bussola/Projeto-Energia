@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% csrf_token %}
+
+<head>
+    <title>Teste API - Coleta</title>
+    <style>
+        body div { padding:10px; }
+    </style>
+</head>
+<body>
+    <div style="border:1px solid silver;">
+        <h4>JSON AUTENTICACAO:</h4>
+        <p id="json-data"></p>
+        <br>
+        <h4>URL API:</h4>
+        <p id="url-api"></p>
+    </div><br><br>
+
+    <div style="border:1px solid blue;">
+        <h4>COMPLETO</h4>
+        <p id="complete"></p>
+    </div><br><br>
+
+     <div style="border:1px solid green;">
+        <h4>SUCESSO</h4>
+        <p id="success"></p>
+    </div><br><br>
+
+    <div style="border:1px solid red;">
+        <h4>ERRO</h4>
+        <p id="error"></p>
+    </div>
+</body>
+
+
+</html>
+
+<script src="{% static 'dashboard/bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+<script type="text/javascript">
+$(function() {
+    console.log('COLETA');
+    var url_api = '/api_coletar/'
+    $.ajax({
+        url: url_api,
+        type: "POST",
+        crossDomain: true,
+        success: function(data) {
+            console.log('SUCCESS ------------------------------========');
+            $('#success').text(data);
+        },
+        complete: function(res) {
+            console.log('COMPLETE ------------------------------========');
+            $('#complete').text(res.responseText);
+        },
+        error: function(erro) {
+            console.log('ERROR ------------------------------========');
+            $('#error').text(erro);
+        }
+    });
+});
+</script>

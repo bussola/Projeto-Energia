@@ -1,12 +1,10 @@
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.shortcuts import render
-from django.shortcuts import redirect
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import render
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, Coleta
@@ -14,13 +12,7 @@ from .models import User, Coleta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from dashboard.devicewise.DevicewiseHttp    import DevicewiseHttp
-from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
-
-
-import json
-import requests
-from datetime import datetime
+from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 
 
 def index(request):
@@ -188,55 +180,60 @@ class horarios_rest(APIView):
 
 @csrf_exempt
 def api_login(request):
-    return render(request, 'dashboard/api_login.html')
+    api = DevicewiseHttp()
+    info = api.debugar()
+    return HttpResponse(info)
+
+
+@csrf_exempt
+def coleta_exemplo(request):
+    return render(request, 'dashboard/coleta_exemplo.html')
+
+
+@csrf_exempt
+def por_canal_exemplo(request):
+    return render(request, 'dashboard/coleta_por_canal_exemplo.html')
+
 
 @csrf_exempt
 def api_coletar(request, *args, **kwargs):
     # Coletando dados da API
-    thing_key = 'hab0001' # Essa informacao deve estar no cadastro dele
+    thing_key = 'hab0001'  # Essa informacao deve estar no cadastro dele
     api = DevicewiseHttp()
-    dados = api.achar(thing_key)
-    # Persistindo dados no banco
+    dados = api.coletar(thing_key)
+    print(dados)
     '''
-    coleta = Coleta()
-    coleta.canal1 = 'io_6'
-    coleta.canal2 = 'io_7'
-    coleta.canal3 = 'io_8'
-    coleta.canal4 = 'io_9'
-    coleta.canal5 = 'io_10'
-    coleta.canal6 = 'io_11'
-    coleta.canal7 = 'io_12'
+      coleta = Coleta()
+      coleta.canal1 = 'io_6'
+      coleta.canal2 = 'io_7'
+      coleta.canal3 = 'io_8'
+      coleta.canal4 = 'io_9'
+      coleta.canal5 = 'io_10'
+      coleta.canal6 = 'io_11'
+      coleta.canal7 = 'io_12'
 
-    coleta.nivel_sinal= dados['signallevel']
+      coleta.nivel_sinal= dados['signallevel']
 
-    coleta.valor1 = dados['io_6']
-    coleta.valor2 = dados['io_7']
-    coleta.valor3 = dados['io_8']
-    coleta.valor4 = dados['io_9']
-    coleta.valor5 = dados['io_10']
-    coleta.valor6 = dados['io_11']
-    coleta.valor7 = dados['io_12']
+      coleta.valor1 = dados['io_6']
+      coleta.valor2 = dados['io_7']
+      coleta.valor3 = dados['io_8']
+      coleta.valor4 = dados['io_9']
+      coleta.valor5 = dados['io_10']
+      coleta.valor6 = dados['io_11']
+      coleta.valor7 = dados['io_12']
 
-    coleta.id_transdutor
-    coleta.save()
-'''
-
-    for key, value in dados.items():
-        print('--------------------------------------- ')
-        print('Itens: ' + key, value)
-        for k, value in dados[key].items():
-            print('Canal: ' + k, value)
-
+      coleta.id_transdutor
+      coleta.save()
+  '''
     return JsonResponse(dados, safe=False)
 
+
 @csrf_exempt
-def api_coletar_periodo(request, *args, **kwargs):
+def api_coletar_por_canal(request, *args, **kwargs):
+    thing_key = 'hab0001'
+    canal = 'io_8'
+    antes = '2017-11-01T00:00:00Z'  # as datas estao fixas apenas para demonstacao
+    depois = '2017-11-01T00:59:59Z'
     api = DevicewiseHttp()
-    coletor = DevicewiseColetor(api)
-    key = 'hab0001'
-    now = datetime.now()
-    print(now)
-    print(now+10)
-    dados = coletor.coletar_periodo(key, now, now+10)
-    print(dados)
-    return JsonResponse(dados)
+    dados = api.coletar_por_canal(thing_key, canal, antes, depois)
+    return JsonResponse(dados, safe=False)

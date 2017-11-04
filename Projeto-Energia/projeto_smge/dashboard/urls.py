@@ -14,9 +14,11 @@ urlpatterns = [
     url(r'^gasto_mensal', views.gasto_mensal, name='gasto_mensal'),
     url(r'^gastomensalporsetores', views.gasto_mensal_por_setores, name='gasto_mensal_por_setores'),
 
-    url(r'^api_login', views.api_login, name='api_login'),
-    url(r'^api_coletar', views.api_coletar, name='api_coletar'),
-    url(r'^api_coletar_periodo', views.api_coletar_periodo, name='api_coletar_periodo'),
+    url(r'^api_login',  views.api_login, name='api_login'),
+    url(r'^coleta_exemplo/$', views.coleta_exemplo, name='coleta_exemplo'),
+    url(r'^por_canal_exemplo/$', views.por_canal_exemplo, name='por_canal_exemplo'),
+    url(r'^api_coletar/$', views.api_coletar, name='api_coletar'),
+    url(r'^api_coletar_por_canal/$', views.api_coletar_por_canal, name='api_coletar_por_canal'),
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 

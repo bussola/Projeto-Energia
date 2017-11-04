@@ -85,7 +85,7 @@ class DevicewiseHttp(object):
     def autenticar_aplicativo(self, app_id, app_token, thing_key, update_session_id=True):
         """Autentica a aplicação."""
         string_json = {"auth": {"command": "api.authenticate",
-                         "params": {"appId": app_id, "appToken": app_token, "thingKey": thing_key}}}
+                                "params": {"appId": app_id, "appToken": app_token, "thingKey": thing_key}}}
         response = self.postar(string_json)
         if response == True:
             if update_session_id:
@@ -137,6 +137,9 @@ class DevicewiseHttp(object):
         self.last_received = ""
         self.response = ""
 
+        print('------------- POSTAR \n' + str(string_json))
+        print('------------------')
+
         string_json = self.informar_auth_json(string_json)
         self.last_sent = string_json
 
@@ -153,9 +156,6 @@ class DevicewiseHttp(object):
         if "success" in self.response:
             self.last_status = self.response["success"]
 
-            # for key, value in self.response.items():
-            # print(key, value)
-
         return self.last_status
 
     # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
@@ -168,10 +168,21 @@ class DevicewiseHttp(object):
 
     # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
     # @return    dict    Resposta de dados.
-    def obter_transdutores(self):
+    def obter_canais(self):
         """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
         if self.last_status and len(self.response['dados']['params']['properties']) > 0:
             return self.response['dados']['params']['properties']
+        return None
+
+    # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
+    # @return    dict    Resposta de dados.
+    def obter_canal(self):
+        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
+        print('---- ')
+        print(str(self.response['canal']['params']))
+        if self.last_status and len(self.response['canal']['params']['values']) > 0:
+            print(str(self.response['canal']))
+            return self.response['canal']['params']['values']
         return None
 
     # Retorna uma lista de opções. Util para inicialização e objetos existentes de uma sub-classe.
@@ -214,9 +225,22 @@ class DevicewiseHttp(object):
     # Executa o metodo 'thing.find'.
     # @param     thing_key   Codigo de identificacao do cliente.
     # @return    string      Json contento coletas encontradas.
-    def achar(self, thing_key):
-        json = {'auth': {'sessionId': self.session_id}, 'dados': {'command': 'thing.find', 'params': {'key': thing_key}}}
-        print('Devicewise.ACHAR----------------------------  ' + str(json))
+    def coletar(self, thing_key):
+        json = {'auth': {'sessionId': self.session_id},
+                'dados': {'command': 'thing.find', 'params': {'key': thing_key}}}
         if self.postar(json):
-            return self.obter_transdutores()
+            return self.obter_canais()
+        return None
+
+    # Executa o metodo 'property.history' que traz as leituras de um canal especifico.
+    # @param    thing_key   Codigo de identificacao do cliente
+    # @param    canal       Canal desejado do transdutor
+    # @param    data_inicio Data inicial
+    # @param    data_fim    Data final
+    def coletar_por_canal(self, thing_key, canal, data_inicio, data_fim):
+        params = {'thingKey': thing_key, 'key': canal, 'start': data_inicio, 'end': data_fim}
+        string_json = {'auth': {'sessionId': self.session_id},
+                       'canal': {'command': 'property.history', 'params': params}}
+        if self.postar(string_json):
+            return self.obter_canal()
         return None

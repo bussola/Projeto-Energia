@@ -4,7 +4,7 @@
 {% csrf_token %}
 
 <head>
-    <title>Teste API</title>
+    <title>Teste API - Coleta por canal</title>
     <style>
         body div { padding:10px; }
     </style>
@@ -41,7 +41,8 @@
 
 <script type="text/javascript">
 $(function() {
-    var url_api = '/api_coletar/'
+    console.log('COLETA');
+    var url_api = '/api_coletar_por_canal/';
     $.ajax({
         url: url_api,
         type: "POST",
