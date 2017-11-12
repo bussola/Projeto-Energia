@@ -22,6 +22,6 @@ urlpatterns = [
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 
-    #handler404 = 'mysite.views.my_custom_page_not_found_view',
+    handler404 = 'views.my_custom_page_not_found_view',
 ]
 
