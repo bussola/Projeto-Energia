@@ -24,17 +24,17 @@ def index(request):
     return render(request, 'dashboard/index.html', context)
 
 
-def detail(request, cliente_id):
-    try:
-        question = User.objects.get(pk=cliente_id)
-    except User.DoesNotExist:
-        raise Http404("Cliente does not exist")
-    return render(request, 'dashboard/detail.html', {'question': question})
+# def detail(request, cliente_id):
+#     try:
+#         question = User.objects.get(pk=cliente_id)
+#     except User.DoesNotExist:
+#         raise Http404("Cliente does not exist")
+#     return render(request, 'dashboard/detail.html', {'question': question})
 
 
-def results(request, cliente_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % cliente_id)
+# def results(request, cliente_id):
+#     response = "You're looking at the results of question %s."
+#     return HttpResponse(response % cliente_id)
 
 
 @login_required
