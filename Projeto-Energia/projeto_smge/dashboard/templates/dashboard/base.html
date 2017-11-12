@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -244,8 +245,9 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt="">
-                            <span class="hidden-xs">
+                            <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt=""> -->
+                            <img src="/{{ user.avatar }}" class="user-image" alt="">
+			    <span class="hidden-xs">
 								{% if user.is_authenticated %}
 									{% if user.first_name %}
 										{{user.first_name}}
@@ -260,8 +262,8 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt="">
-
+                                <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
+				<img src="/{{ user.avatar }}" class="user-image" alt="">
                                 <p>
                                     Bruno Drago - Consultor
                                     <small>Membro desde Nov. 2015</small>
@@ -308,8 +310,9 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt="">
-                </div>
+                    <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
+                    <img src="/{{ user.avatar }}" class="user-image" alt="">
+		</div>
                 <div class="pull-left info">
                     {% if user.is_authenticated %}
 						{% if user.first_name %}
