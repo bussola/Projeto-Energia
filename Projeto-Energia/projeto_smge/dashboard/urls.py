@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 
+handler404 = 'views.my_custom_page_not_found_view'
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
@@ -22,6 +24,6 @@ urlpatterns = [
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 
-    handler404 = 'views.my_custom_page_not_found_view',
+    #handler404 = 'views.my_custom_page_not_found_view',
 ]
 
