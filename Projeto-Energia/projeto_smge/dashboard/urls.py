@@ -22,6 +22,8 @@ urlpatterns = [
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 
+    handler404 = 'mysite.views.my_custom_page_not_found_view',
+
     # # ex: /polls/5/
     # url(r'^(?P<cliente_id>[0-9]+)/$', views.detail, name='detail'),
     # # ex: /polls/5/results/

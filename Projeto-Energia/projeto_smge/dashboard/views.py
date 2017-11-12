@@ -15,6 +15,9 @@ from rest_framework.response import Response
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 
 
+def my_custom_page_not_found_view(request):
+    return render(request, 'dashboard/404.html', )
+
 def index(request):
     nomes = User.objects.filter(pk=1)
     first_name = User.objects.values_list('first_name', flat=True).filter(pk=2)
