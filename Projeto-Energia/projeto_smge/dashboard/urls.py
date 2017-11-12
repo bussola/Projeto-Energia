@@ -23,7 +23,5 @@ urlpatterns = [
     url(r'^api_coletar_por_canal/$', views.api_coletar_por_canal, name='api_coletar_por_canal'),
 
     url(r'^horarios_rest', views.horarios_rest.as_view()),
-
-    #handler404 = 'views.my_custom_page_not_found_view',
 ]
 
