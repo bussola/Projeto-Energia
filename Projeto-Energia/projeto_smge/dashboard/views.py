@@ -53,9 +53,11 @@ def index(request):
 def graficos(request):
     first_name = User.objects.values_list('first_name', flat=True).filter(pk=2)
     last_name = User.objects.values_list('last_name', flat=True).filter(pk=2)
+    date_joined = User.objects.values_list('date_joined', flat=True).filter(pk=2)
     context = {
         'last_name': last_name,
         'first_name': first_name,
+        'date_joined': date_joined,
     }
     return render(request, 'dashboard/graficos.html', context)
 

@@ -265,8 +265,23 @@
                                 <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
 				<img src="/{{ user.avatar }}" class="user-image" alt="">
                                 <p>
-                                    Bruno Drago - Consultor
-                                    <small>Membro desde Nov. 2015</small>
+                                {% if user.is_authenticated %}
+                                    {% if user.first_name %}
+                                        {{user.first_name}}
+                                    {% else %}
+                                        {{ user.get_username }}
+                                    {% endif %}
+                                {% else %}
+                                    Faça o login
+                                {% endif %}
+                                    <small>Membro desde 
+                                    {% if user.is_authenticated %}
+                                        {{user.date_joined}}
+                                    {% else %}
+                                            Faça o login
+                                    {% endif %}
+
+                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
