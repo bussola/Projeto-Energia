@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
-from django.contrib.auth_views import views as auth_views
+#from django.contrib.auth_views import views as auth_views
+from django.contrib.auth import views as auth_views
 
 handler400 = 'views.my_custom_bad_request_view'
 handler403 = 'views.my_custom_permission_denied_view'
