@@ -54,9 +54,10 @@ def do_change_password(request):
 
 @login_required
 def graficos(request):
-    first_name = User.objects.values_list('first_name', flat=True).filter(pk=str(self.id))
-    last_name = User.objects.values_list('last_name', flat=True).filter(pk=str(self.id))
-    date_joined = User.objects.values_list('date_joined', flat=True).filter(pk=str(self.id))
+    current_user = request.user
+    first_name = User.objects.values_list('first_name', flat=True).filter(pk=current_user.id)
+    last_name = User.objects.values_list('last_name', flat=True).filter(pk=current_user.id)
+    date_joined = User.objects.values_list('date_joined', flat=True).filter(pk=current_user.id)
     context = {
         'last_name': last_name,
         'first_name': first_name,
