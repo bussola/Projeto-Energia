@@ -15,8 +15,8 @@ urlpatterns = [
     url(r'^password$', views.do_change_password, name='change_password'),
 
     url(r'^reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)$',
-            'views.reset_confirm', name='reset_confirm'),
-    url(r'^reset$', 'views.reset', name='reset'),
+            views.reset_confirm, name='reset_confirm'),
+    url(r'^reset$', views.reset, name='reset'),
 
 
 	url(r'^graficos$', views.graficos, name='graficos'),
