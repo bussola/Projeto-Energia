@@ -1,17 +1,16 @@
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-
 from .models import User, Coleta
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 
 
@@ -36,17 +35,21 @@ def index(request):
     return render(request, 'dashboard/index.html', context)
 
 
-# def detail(request, cliente_id):
-#     try:
-#         question = User.objects.get(pk=cliente_id)
-#     except User.DoesNotExist:
-#         raise Http404("Cliente does not exist")
-#     return render(request, 'dashboard/detail.html', {'question': question})
-
-
-# def results(request, cliente_id):
-#     response = "You're looking at the results of question %s."
-#     return HttpResponse(response % cliente_id)
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
 
 
 @login_required

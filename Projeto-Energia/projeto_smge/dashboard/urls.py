@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^login$', views.do_login, name='login'),
 	url(r'^logout$', views.do_logout, name='logout'),
 
+    url(r'^password/$', views.change_password, name='change_password'),
+
 	url(r'^graficos$', views.graficos, name='graficos'),
 
     url(r'^consumo_mensal', views.consumo_mensal, name='consumo_mensal'),
