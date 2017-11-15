@@ -13,8 +13,11 @@ urlpatterns = [
 	url(r'^logout$', views.do_logout, name='logout'),
 
     url(r'^password$', views.do_change_password, name='change_password'),
-    url(r'^reset_password$', views.do_reset_password, name='reset_password'),
-    url(r'^pwd_reset$', views.password_reset, name='reset_pwd'),
+
+    url(r'^reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+            'app.views.reset_confirm', name='reset_confirm'),
+    url(r'^reset/$', 'app.views.reset', name='reset'),
+
 
 	url(r'^graficos$', views.graficos, name='graficos'),
 

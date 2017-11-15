@@ -6,12 +6,18 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Coleta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
+
+from django.core.urlresolvers import reverse
+
+
+
 
 
 def my_custom_bad_request_view(request):
@@ -51,65 +57,19 @@ def do_change_password(request):
         'form': form
     })
 
-def do_reset_password(request):
-    if request.method == 'POST':
-        form = PasswordResetForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('reset_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        #form = PasswordResetForm(request.user)
-        data = {'email':'vbussola@yahoo.com'}
-        form = PasswordResetForm(data)
-        self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors,
-                         {'email': [u"That e-mail address doesn't have an associated user account. Are you sure you've registered?"]})
-    return render(request, 'dashboard/reset_password.html', {
-        'form': form
-    })
+
+def reset_confirm(request, uidb36=None, token=None):
+    return password_reset_confirm(request, template_name='app/reset_confirm.html',
+        uidb36=uidb36, token=token, post_reset_redirect=reverse('app:login'))
 
 
+def reset(request):
+    return password_reset(request, template_name='app/reset.html',
+        email_template_name='app/reset_email.html',
+        subject_template_name='app/reset_subject.txt',
+        post_reset_redirect=reverse('app:login'))
 
-def password_reset(request, is_admin_site=False,
-                   template_name='dashboard/reset_password.html',
-                   email_template_name='dashboard/reset_password.html',
-                   data = {'email':'vbussola@yahoo.com'}
-                   password_reset_form=PasswordResetForm(data),
-                   token_generator=default_token_generator,
-                   post_reset_redirect=None,
-                   from_email=None,
-                   current_app=None,
-                   extra_context=None):
-    if post_reset_redirect is None:
-        post_reset_redirect = reverse('django.contrib.auth.views.password_reset_done')
-    if request.method == "POST":
-        form = password_reset_form(request.POST)
-        if form.is_valid():
-            opts = {
-                'use_https': request.is_secure(),
-                'token_generator': token_generator,
-                'from_email': from_email,
-                'email_template_name': email_template_name,
-                'request': request,
-            }
-            if is_admin_site:
-                opts = dict(opts, domain_override=request.META['HTTP_HOST'])
-            form.save(**opts)
-            return HttpResponseRedirect(post_reset_redirect)
-    else:
-        form = password_reset_form()
-    context = {
-        'form': form,
-    }
-    context.update(extra_context or {})
-    return render_to_response(template_name, context,
-                              context_instance=RequestContext(request, current_app=current_app))
-
-
+    
 
 @login_required
 def graficos(request):
