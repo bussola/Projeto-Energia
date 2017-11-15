@@ -58,16 +58,16 @@ def do_change_password(request):
     })
 
 
-def reset_confirm(request, uidb36=None, token=None):
-    return password_reset_confirm(request, template_name='dashboard/password_reset_confirm.html',
-        uidb36=uidb36, token=token, post_reset_redirect=reverse('dashboard:login'))
+# def reset_confirm(request, uidb36=None, token=None):
+#     return password_reset_confirm(request, template_name='dashboard/password_reset_confirm.html',
+#         uidb36=uidb36, token=token, post_reset_redirect=reverse('dashboard:login'))
 
 
-def reset(request):
-    return password_reset(request, template_name='dashboard/reset.html',
-        email_template_name='dashboard/reset_email.html',
-        subject_template_name='dashboard/reset_subject.txt',
-        post_reset_redirect=reverse('dashboard:login'))
+# def reset(request):
+#     return password_reset(request, template_name='dashboard/reset.html',
+#         email_template_name='dashboard/reset_email.html',
+#         subject_template_name='dashboard/reset_subject.txt',
+#         post_reset_redirect=reverse('dashboard:login'))
 
 
 
