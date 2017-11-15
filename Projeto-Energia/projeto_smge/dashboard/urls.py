@@ -14,6 +14,7 @@ urlpatterns = [
 
     url(r'^password$', views.do_change_password, name='change_password'),
     url(r'^reset_password$', views.do_reset_password, name='reset_password'),
+    url(r'^pwd_reset$', views.password_reset, name='reset_pwd'),
 
 	url(r'^graficos$', views.graficos, name='graficos'),
 
