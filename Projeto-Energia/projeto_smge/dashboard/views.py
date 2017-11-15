@@ -77,7 +77,8 @@ def do_reset_password(request):
 def password_reset(request, is_admin_site=False,
                    template_name='dashboard/reset_password.html',
                    email_template_name='dashboard/reset_password.html',
-                   password_reset_form=PasswordResetForm,
+                   data = {'email':'vbussola@yahoo.com'}
+                   password_reset_form=PasswordResetForm(data),
                    token_generator=default_token_generator,
                    post_reset_redirect=None,
                    from_email=None,
