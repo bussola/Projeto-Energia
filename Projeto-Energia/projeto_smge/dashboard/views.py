@@ -35,7 +35,7 @@ def index(request):
     return render(request, 'dashboard/index.html', context)
 
 
-def change_password(request):
+def do_change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -54,9 +54,9 @@ def change_password(request):
 
 @login_required
 def graficos(request):
-    first_name = User.objects.values_list('first_name', flat=True).filter(pk=2)
-    last_name = User.objects.values_list('last_name', flat=True).filter(pk=2)
-    date_joined = User.objects.values_list('date_joined', flat=True).filter(pk=2)
+    first_name = User.objects.values_list('first_name', flat=True).filter(pk=str(self.id))
+    last_name = User.objects.values_list('last_name', flat=True).filter(pk=str(self.id))
+    date_joined = User.objects.values_list('date_joined', flat=True).filter(pk=str(self.id))
     context = {
         'last_name': last_name,
         'first_name': first_name,
