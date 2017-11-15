@@ -51,6 +51,23 @@ def do_change_password(request):
         'form': form
     })
 
+def do_reset_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('reset_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordResetForm(request.user)
+    return render(request, 'dashboard/reset_password.html', {
+        'form': form
+    })
+
+
 
 @login_required
 def graficos(request):
