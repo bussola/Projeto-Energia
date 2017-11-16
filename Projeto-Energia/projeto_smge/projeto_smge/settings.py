@@ -69,7 +69,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'projeto_smge.wsgi.application'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# using gmail as my smtp server
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dificilaxarnome@gmail.com'
+EMAIL_HOST_PASSWORD = 'flornapa00'
+EMAIL_PORT = 587
+
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

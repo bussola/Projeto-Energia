@@ -26,6 +26,8 @@ urlpatterns = [
     #url(r'^dashboard/', include('dashboard.urls')),
     url(r'^', include('dashboard.urls', namespace='dashboard', app_name='dashboard')),
     url(r'^admin/', admin.site.urls),
+
+    url(r'^', include('django.contrib.auth.urls')),
 	
     #url(r'^login/', include('dashboard.urls')),
     #url(r'^login/$', TemplateView.as_view(template_name='home.html'), name='home'),
