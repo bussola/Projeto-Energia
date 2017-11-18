@@ -80,7 +80,7 @@ EMAIL_USE_TLS = True
 
 
 #EMAIL_HOST = 'smtp.acessos-smge.com.br'
-EMAIL_HOST = 'smtp.smge.com.br'
+EMAIL_HOST = 'smtp.mail.smge.com.br'
 EMAIL_HOST_USER = 'no-reply@acessos-smge.com.br'
 EMAIL_HOST_PASSWORD = 'Energia123'
 EMAIL_PORT = 587
