@@ -13,11 +13,7 @@ from .models import User, Coleta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
-
 from django.core.urlresolvers import reverse
-
-
-
 
 
 def my_custom_bad_request_view(request):
