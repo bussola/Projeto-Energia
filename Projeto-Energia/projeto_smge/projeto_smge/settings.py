@@ -72,11 +72,17 @@ WSGI_APPLICATION = 'projeto_smge.wsgi.application'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# using gmail as my smtp server
+# using smtp email server
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'dificilaxarnome@gmail.com'
-EMAIL_HOST_PASSWORD = 'flornapa00'
+EMAIL_HOST_USER = 'esavecontato@gmail.com'
+EMAIL_HOST_PASSWORD = 'chicogay'
+
+
+# #EMAIL_HOST = 'smtp.acessos-smge.com.br'
+# EMAIL_HOST = 'mail.acessos-smge.com.br'
+# EMAIL_HOST_USER = 'no-reply@acessos-smge.com.br'
+# EMAIL_HOST_PASSWORD = 'Energia123'
 EMAIL_PORT = 587
 
 
@@ -120,9 +126,9 @@ SESSION_COOKIE_AGE = 60 * 60 * 2
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
