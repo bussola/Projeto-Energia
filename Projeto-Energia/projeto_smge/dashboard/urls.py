@@ -52,6 +52,8 @@ urlpatterns = [
     url(r'^api_coletar/$', views.api_coletar, name='api_coletar'),
     url(r'^api_coletar_por_canal/$', views.api_coletar_por_canal, name='api_coletar_por_canal'),
 
+    url(r'^iniciar_coletas$', views.iniciar_coletas, name='iniciar_coletas'),
+
     url(r'^horarios_rest', views.horarios_rest.as_view()),
 ]
 

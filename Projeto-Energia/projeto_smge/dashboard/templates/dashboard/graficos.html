@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    <!-- CONSUMO MENSAL - POR SETOR --------------------------------------------- -->
     <div class="col-md-4">
         <div class="panel">
             <div class="panel-heading text-center">
@@ -25,6 +26,7 @@
             </div>
         </div>
     </div>
+    <!-- GASTO MENSAL --------------------------------------------- -->
     <div class="col-md-8">
         <div class="panel">
             <div class="panel-heading text-center">
@@ -34,8 +36,8 @@
                 <div id="chartGastoMensal" style="height: 250px;"></div>
             </div>
         </div>
-
     </div>
+    <!-- GASTO MENSAL POR SETOR --------------------------------------------- -->
     <div class="col-md-4">
         <div class="panel">
             <div class="panel-heading text-center">
@@ -55,12 +57,15 @@
 
 
 // ---------------------------------- CONSUMO MENSAL
+mes_atual = new Date().getMonth() + 1;
 $.ajax({
     method: 'GET',
     url: '/consumo_mensal/',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
+    data: { mes: mes_atual },
     success: function(data) {
+        console.log(data);
         xKey = 'Dia';
         yKeys = ['Consumo'];
         labels = ['Consumo'];
@@ -113,8 +118,11 @@ $.ajax({
     contentType: "application/json; charset=utf-8",
     success: function(data) {
         bindDonut('chartGastoMensalSetores', data);
+        console.log('Gasto mensal por setores [OK]');
+        console.log(data);
     },
     error: function(error_data){
+        console.log('Gasto mensal por setores [ERRO]');
         console.log(error_data);
     }
 });

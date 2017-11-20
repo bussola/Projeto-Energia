@@ -9,28 +9,31 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from .models import User, Coleta
+from .models import User, Coleta, Transdutor
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
+from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 
 from django.core.urlresolvers import reverse
 
 
 
-
-
 def my_custom_bad_request_view(request):
     return render(request, '400.html', )
- 
+
+
 def my_custom_permission_denied_view(request):
     return render(request, '403.html', )
- 
+
+
 def my_custom_page_not_found_view(request):
     return render(request, '404.html', )
- 
+
+
 def my_custom_error_view(request):
     return render(request, '500.html', )
+
 
 def index(request):
     nomes = User.objects.filter(pk=1)
@@ -108,40 +111,29 @@ def do_logout(request):
 
 
 def consumo_mensal(request, *args, **kargs):
-    data1 = [
-        {'Dia': '01', 'Consumo': 51333},
-        {'Dia': '02', 'Consumo': 30222},
-        {'Dia': '03', 'Consumo': 20442},
-        {'Dia': '04', 'Consumo': 20123},
-        {'Dia': '05', 'Consumo': 32333},
-        {'Dia': '06', 'Consumo': 44963},
-        {'Dia': '07', 'Consumo': 42124},
-        {'Dia': '08', 'Consumo': 52322},
-        {'Dia': '09', 'Consumo': 62223},
-        {'Dia': '10', 'Consumo': 82111},
-        {'Dia': '11', 'Consumo': 92223},
-        {'Dia': '12', 'Consumo': 92099},
-        {'Dia': '13', 'Consumo': 82724},
-        {'Dia': '14', 'Consumo': 66875},
-        {'Dia': '15', 'Consumo': 42312},
-        {'Dia': '16', 'Consumo': 32222},
-        {'Dia': '17', 'Consumo': 22222},
-        {'Dia': '18', 'Consumo': 12222},
-        {'Dia': '19', 'Consumo': 32222},
-        {'Dia': '20', 'Consumo': 42222},
-        {'Dia': '21', 'Consumo': 52222},
-        {'Dia': '22', 'Consumo': 62222},
-        {'Dia': '23', 'Consumo': 72222},
-        {'Dia': '24', 'Consumo': 72222},
-        {'Dia': '25', 'Consumo': 62222},
-        {'Dia': '26', 'Consumo': 52222},
-        {'Dia': '27', 'Consumo': 42222},
-        {'Dia': '28', 'Consumo': 32222},
-        {'Dia': '29', 'Consumo': 22222},
-        {'Dia': '30', 'Consumo': 12222},
-        {'Dia': '31', 'Consumo': 12222},
-    ]
-    return JsonResponse(data1, safe=False)
+    # TODO: Vou refatorar isso, mds... vou criar uma classe para regras de negocio e separar da VIEW tirando tudo isso daqui, pois a VIEW é apenas para definir fluxo (mais nada)
+    mes = request.GET['mes']  # TODO: coloquei aqui pq nao consegui passar como parametro na URL, depois conversamos sobre
+    dados = []
+    transdutores = Transdutor.objects.filter(id_cliente=request.user.id)
+    for t in transdutores:
+        coletas = Coleta.objects.filter(id_transdutor_id=t.id, data_leitura__month=mes).order_by('data_leitura')
+        for c in coletas:
+            # soma os valores dos canais
+            valores = [float(c.io6), float(c.io7), float(c.io8), float(c.io9), float(c.io10), float(c.io11),
+                       float(c.io12)]
+            soma = sum(valores)
+            dia = int(c.data_leitura.day)
+            adicionado = False
+            for dado in dados:
+                if dado['Dia'] == dia:
+                    novo_valor = float(dado['Consumo']) + soma
+                    dado['Consumo'] = "%.4f" % novo_valor
+                    adicionado = True
+
+            if not adicionado:
+                dados.append({'Dia': dia, 'Consumo': "%.4f" % soma})
+
+    return JsonResponse(dados, safe=False)
 
 
 def consumo_mensal_por_setores(request, *args, **kargs):
@@ -227,6 +219,13 @@ def coleta_exemplo(request):
     return render(request, 'dashboard/coleta_exemplo.html')
 
 
+def iniciar_coletas(request):
+    api = DevicewiseColetor(request.user)
+    ok = api.coletar_por_usuario()
+    resposta = 'Coleta efetuada com exito' if ok else 'Erro ao coletar dados'
+    return HttpResponse(resposta)
+
+
 @csrf_exempt
 def por_canal_exemplo(request):
     return render(request, 'dashboard/coleta_por_canal_exemplo.html')
@@ -238,30 +237,6 @@ def api_coletar(request, *args, **kwargs):
     thing_key = 'hab0001'  # Essa informacao deve estar no cadastro dele
     api = DevicewiseHttp()
     dados = api.coletar(thing_key)
-    print(dados)
-    '''
-      coleta = Coleta()
-      coleta.canal1 = 'io_6'
-      coleta.canal2 = 'io_7'
-      coleta.canal3 = 'io_8'
-      coleta.canal4 = 'io_9'
-      coleta.canal5 = 'io_10'
-      coleta.canal6 = 'io_11'
-      coleta.canal7 = 'io_12'
-
-      coleta.nivel_sinal= dados['signallevel']
-
-      coleta.valor1 = dados['io_6']
-      coleta.valor2 = dados['io_7']
-      coleta.valor3 = dados['io_8']
-      coleta.valor4 = dados['io_9']
-      coleta.valor5 = dados['io_10']
-      coleta.valor6 = dados['io_11']
-      coleta.valor7 = dados['io_12']
-
-      coleta.id_transdutor
-      coleta.save()
-  '''
     return JsonResponse(dados, safe=False)
 
 
@@ -269,8 +244,8 @@ def api_coletar(request, *args, **kwargs):
 def api_coletar_por_canal(request, *args, **kwargs):
     thing_key = 'hab0001'
     canal = 'io_8'
-    antes = '2017-11-01T00:00:00Z'  # as datas estao fixas apenas para demonstacao
-    depois = '2017-11-01T00:59:59Z'
+    antes = '2000-01-01T00:00:00Z'  # as datas estao fixas apenas para demonstacao
+    depois = '2017-12-31T23:59:59Z'
     api = DevicewiseHttp()
     dados = api.coletar_por_canal(thing_key, canal, antes, depois)
     return JsonResponse(dados, safe=False)
