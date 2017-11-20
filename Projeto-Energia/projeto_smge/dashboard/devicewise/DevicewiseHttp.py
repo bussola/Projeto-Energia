@@ -137,9 +137,6 @@ class DevicewiseHttp(object):
         self.last_received = ""
         self.response = ""
 
-        print('------------- POSTAR \n' + str(string_json))
-        print('------------------')
-
         string_json = self.informar_auth_json(string_json)
         self.last_sent = string_json
 
@@ -161,16 +158,13 @@ class DevicewiseHttp(object):
     # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
     # @return    dict    Resposta de dados.
     def obter_resposta(self):
-        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
-        if self.last_status and len(self.response['dados']['params']['properties']) > 0:
-            return self.response['dados']['params']['properties']
-        return None
+        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""''
+        if self.response['dados']['success'] is False:
+            raise Exception(self.response['dados']['errorMessages'])
 
-    # Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido.
-    # @return    dict    Resposta de dados.
-    def obter_canais(self):
-        """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
         if self.last_status and len(self.response['dados']['params']['properties']) > 0:
+            self.response['dados']['params']['properties']['lastCommunication'] = self.response['dados']['params'][
+                'lastCommunication']
             return self.response['dados']['params']['properties']
         return None
 
@@ -178,10 +172,7 @@ class DevicewiseHttp(object):
     # @return    dict    Resposta de dados.
     def obter_canal(self):
         """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
-        print('---- ')
-        print(str(self.response['canal']['params']))
         if self.last_status and len(self.response['canal']['params']['values']) > 0:
-            print(str(self.response['canal']))
             return self.response['canal']['params']['values']
         return None
 
@@ -229,7 +220,7 @@ class DevicewiseHttp(object):
         json = {'auth': {'sessionId': self.session_id},
                 'dados': {'command': 'thing.find', 'params': {'key': thing_key}}}
         if self.postar(json):
-            return self.obter_canais()
+            return self.obter_resposta()
         return None
 
     # Executa o metodo 'property.history' que traz as leituras de um canal especifico.
