@@ -1,18 +1,13 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/modules.xml
 .idea/misc.xml
 .idea/Projeto-Energia-Novo.iml
-Projeto-Energia/projeto_smge/projeto_smge/__pycache__/wsgi.cpython-36.pyc
-Projeto-Energia/projeto_smge/projeto_smge/__pycache__/urls.cpython-36.pyc
-Projeto-Energia/projeto_smge/projeto_smge/__pycache__/settings.cpython-36.pyc
-Projeto-Energia/projeto_smge/projeto_smge/__pycache__/__init__.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/migrations/__pycache__/__init__.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/migrations/__pycache__/0001_initial.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/views.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/urls.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/models.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/managers.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/apps.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/admin.cpython-36.pyc
-Projeto-Energia/projeto_smge/dashboard/__pycache__/__init__.cpython-36.pyc
