@@ -3,14 +3,10 @@ from dashboard.models import Transdutor, Coleta, User
 
 
 class DevicewiseColetor(object):
-
     def __init__(self):
         self.api = DevicewiseHttp()
 
-
     def coletar_por_usuario(self, usuario):
-        print('DevicewiseColetor.coletar_por_usuario()')
-
         transdutores = Transdutor.objects.filter(id_cliente=usuario.id)
         if transdutores is None or len(transdutores) < 1:
             print('Nenhum transdutor encontrado')
@@ -25,7 +21,7 @@ class DevicewiseColetor(object):
 
             data_ultima_leitura = dados['lastCommunication']
             if Coleta.objects.filter(data_leitura=data_ultima_leitura):
-                print('Leitura já coletada')
+                print('Leitura ja coletada')
                 return False
 
             coleta = Coleta()
