@@ -23,10 +23,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(_('staff'), default=True)
     avatar = models.ImageField(upload_to='dashboard/static/avatars/', null=True, blank=True)
 
-    #senha_foi_requisitada = models.BooleanField(_('Senha foi requisitada?'), blank=True, default=False)
-    #chave_senha_requisitada = models.CharField(max_length=64, verbose_name="Chave requisição de senha", null=True)
-    #senha_requisitada_em = models.DateTimeField(_('data requisição'), null=True)
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
