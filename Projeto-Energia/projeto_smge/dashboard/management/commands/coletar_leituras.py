@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-from dashboard.devicewise.DevicewiseColetor import AgendadorTarefas
+from dashboard.devicewise import AgendadorTarefas
 
 # A classe deve ter o nome Command, e herdar de BaseCommand
 class Command(BaseCommand):
