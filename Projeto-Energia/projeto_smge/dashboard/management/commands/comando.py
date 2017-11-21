@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
+#from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 
 class Command(BaseCommand):
