@@ -1,12 +1,16 @@
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 from dashboard.models import Transdutor, Coleta, User
 
+
 class DevicewiseColetor(object):
 
-    def __init__(self, usuario):
+    def __init__(self):
+        self.api = DevicewiseHttp()
+
+
+    def set_usuario(self, usuario):
         if usuario is None:
             raise Exception('Usuário/Cliente não informado!')
-        self.api = DevicewiseHttp()
         self.cliente = usuario
 
 
