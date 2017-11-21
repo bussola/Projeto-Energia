@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 from dashboard.models import User
 from apscheduler.schedulers.blocking import BlockingScheduler
