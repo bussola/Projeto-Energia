@@ -220,8 +220,8 @@ def coleta_exemplo(request):
 
 
 def iniciar_coletas(request):
-    api = DevicewiseColetor(request.user)
-    ok = api.coletar_por_usuario()
+    api = DevicewiseColetor()
+    ok = api.coletar_por_usuario(request.user)
     resposta = 'Coleta efetuada com exito' if ok else 'Erro ao coletar dados'
     return HttpResponse(resposta)
 

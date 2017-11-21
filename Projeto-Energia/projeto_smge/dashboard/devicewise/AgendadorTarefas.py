@@ -10,9 +10,8 @@ def coletar_tudo():
     print('Sincronizando com API (transdutores)')
     api = DevicewiseColetor()
     for u in User.objects.all():
-        api.set_usuario(u)
         print('Coletando dados do usuário "%s"' % u.email)
-        if not api.coletar_por_usuario():
+        if not api.coletar_por_usuario(u):
             print('Não foi possível coletar dados do usuário "%s"' % u.email)
 
     print('Todas as leituras foram coletadas com sucesso.')
