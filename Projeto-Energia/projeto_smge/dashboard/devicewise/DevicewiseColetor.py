@@ -10,7 +10,7 @@ class DevicewiseColetor(object):
 
     def set_usuario(self, usuario):
         if usuario is None:
-            raise Exception('Usuário/Cliente não informado!')
+            raise Exception('Usuario/Cliente nao informado!')
         self.cliente = usuario
 
 
@@ -31,7 +31,7 @@ class DevicewiseColetor(object):
 
             data_ultima_leitura = dados['lastCommunication']
             if Coleta.objects.filter(data_leitura=data_ultima_leitura):
-                print('Leitura já coletada')
+                print('Leitura ja coletada')
                 return False
 
             coleta = Coleta()
@@ -65,7 +65,7 @@ class DevicewiseColetor(object):
 
             data_ultima_leitura = dados['lastCommunication']
             if Coleta.objects.filter(data_leitura=data_ultima_leitura):
-                print('Leitura já coletada')
+                print('Leitura ja coletada')
                 return False
 
             coleta = Coleta()

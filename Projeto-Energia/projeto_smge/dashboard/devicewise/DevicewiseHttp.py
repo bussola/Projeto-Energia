@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from httplib2 import Http
 import simplejson as json
 from django.views.decorators.csrf import csrf_exempt
@@ -8,16 +9,16 @@ class DevicewiseHttp(object):
     # Endpoint da API (url)
     endpoint = 'http://api.devicewise.com/api'
 
-    # Identificador da aplicação
+    # Identificador da aplicacao
     app_id = "hab0001"
 
-    # Token da aplicação
+    # Token da aplicacao
     app_token = ""
 
-    # Identifica o método 'thing' que será executado
+    # Identifica o metodo 'thing' que sera executado
     thing_key = ""
 
-    # Nome do usuário para conectar no servidor.
+    # Nome do usuario para conectar no servidor.
     username = 'leandro@habeis.com.br'
 
     # Senha para conectar no servidor.
@@ -66,24 +67,24 @@ class DevicewiseHttp(object):
             self.session_id = ""
             self.autenticar()
 
-    # Efetua autenticacao na API. Dependendo da configuração, autentica o aplicativo ou usuário.
+    # Efetua autenticacao na API. Dependendo da configuracao, autentica o aplicativo ou usuario.
     # @return    bool    Sucesso ou falha na autenticacao.
     def autenticar(self):
-        """Dependendo da servico, autentica o aplicativo ou usuário."""
+        """Dependendo da servico, autentica o aplicativo ou usuario."""
         if len(self.app_id) > 0 and len(self.app_token) > 0 and len(self.thing_key) > 0:
             return self.autenticar_aplicativo(self.app_id, self.app_token, self.thing_key)
         elif len(self.username) > 0 and len(self.password) > 0:
             return self.autenticar_usuario(self.username, self.password)
         return False
 
-    # Autentica a aplicação
-    # @param     string    app_id                ID da aplicação.
-    # @param     string    app_token             Token da aplicação.
-    # @param     string    thing_key             Chave (key) da aplicação (thing).
-    # @param     bool      update_session_id     Atualiza ID da sessão.
-    # @return    bool      Sucesso ou falha na autenticação.
+    # Autentica a aplicacao
+    # @param     string    app_id                ID da aplicacao.
+    # @param     string    app_token             Token da aplicacao.
+    # @param     string    thing_key             Chave (key) da aplicacao (thing).
+    # @param     bool      update_session_id     Atualiza ID da sessao.
+    # @return    bool      Sucesso ou falha na autenticacao.
     def autenticar_aplicativo(self, app_id, app_token, thing_key, update_session_id=True):
-        """Autentica a aplicação."""
+        """Autentica a aplicacao."""
         string_json = {"auth": {"command": "api.authenticate",
                                 "params": {"appId": app_id, "appToken": app_token, "thingKey": thing_key}}}
         response = self.postar(string_json)
