@@ -19,7 +19,10 @@ class DevicewiseColetor(object):
             if dados is None:
                 print('Nada encontrado para o transdutor: ' + t.chave_api)
 
-            data_ultima_leitura = dados['lastCommunication']
+            if dados['lastCommunication']:
+                data_ultima_leitura = dados['lastCommunication']
+            else:
+                data_ultima_leitura = None
             if Coleta.objects.filter(data_leitura=data_ultima_leitura):
                 print('Leitura ja coletada')
                 return False
