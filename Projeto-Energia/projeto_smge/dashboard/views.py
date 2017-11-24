@@ -18,7 +18,6 @@ from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 from django.core.urlresolvers import reverse
 
 
-
 def my_custom_bad_request_view(request):
     return render(request, '400.html', )
 
@@ -36,12 +35,7 @@ def my_custom_error_view(request):
 
 
 def index(request):
-    nomes = User.objects.filter(pk=1)
-    first_name = User.objects.values_list('first_name', flat=True).filter(pk=2)
-    context = {
-        'first_name': first_name,
-    }
-    return render(request, 'dashboard/index.html', context)
+    return render(request, 'dashboard/index.html')
 
 
 def do_change_password(request):
@@ -71,7 +65,6 @@ def do_change_password(request):
 #         email_template_name='dashboard/reset_email.html',
 #         subject_template_name='dashboard/reset_subject.txt',
 #         post_reset_redirect=reverse('dashboard:login'))
-
 
 
 @login_required
@@ -111,8 +104,7 @@ def do_logout(request):
 
 
 def consumo_mensal(request, *args, **kargs):
-    # TODO: Vou refatorar isso, mds... vou criar uma classe para regras de negocio e separar da VIEW tirando tudo isso daqui, pois a VIEW é apenas para definir fluxo (mais nada)
-    mes = request.GET['mes']  # TODO: coloquei aqui pq nao consegui passar como parametro na URL, depois conversamos sobre
+    mes = request.GET['mes']  # TODO: avaliar a forma como isso ta sendo feito
     dados = []
     transdutores = Transdutor.objects.filter(id_cliente=request.user.id)
     for t in transdutores:
@@ -154,31 +146,6 @@ def gasto_mensal(request, *args, **kargs):
         {'Dia': '04', 'Valor': 20123},
         {'Dia': '05', 'Valor': 32333},
         {'Dia': '06', 'Valor': 44963},
-        {'Dia': '07', 'Valor': 42124},
-        {'Dia': '08', 'Valor': 52322},
-        {'Dia': '09', 'Valor': 62223},
-        {'Dia': '10', 'Valor': 82111},
-        {'Dia': '11', 'Valor': 92223},
-        {'Dia': '12', 'Valor': 92099},
-        {'Dia': '13', 'Valor': 82724},
-        {'Dia': '14', 'Valor': 66875},
-        {'Dia': '15', 'Valor': 42312},
-        {'Dia': '16', 'Valor': 32222},
-        {'Dia': '17', 'Valor': 22222},
-        {'Dia': '18', 'Valor': 12222},
-        {'Dia': '19', 'Valor': 32222},
-        {'Dia': '20', 'Valor': 42222},
-        {'Dia': '21', 'Valor': 52222},
-        {'Dia': '22', 'Valor': 62222},
-        {'Dia': '23', 'Valor': 72222},
-        {'Dia': '24', 'Valor': 72222},
-        {'Dia': '25', 'Valor': 62222},
-        {'Dia': '26', 'Valor': 52222},
-        {'Dia': '27', 'Valor': 42222},
-        {'Dia': '28', 'Valor': 32222},
-        {'Dia': '29', 'Valor': 22222},
-        {'Dia': '30', 'Valor': 12222},
-        {'Dia': '31', 'Valor': 12222},
     ]
     return JsonResponse(data3, safe=False)
 
@@ -190,62 +157,4 @@ def gasto_mensal_por_setores(request, *args, **kargs):
         {'value': 12.12, 'label': 'Suprimento'},
         {'value': 51.30, 'label': 'Outros Departamentos'}
     ]
-
     return JsonResponse(data, safe=False)
-
-
-class horarios_rest(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request, format=None):
-        # Substituiremos pelos dados do banco (models), isso é apenas demonstração
-        data = [
-            {'ano': '2016', 'ponta': 24, 'normal': 76},
-            {'ano': '2017', 'ponta': 13, 'normal': 87},
-        ]
-        return Response(data)
-
-
-@csrf_exempt
-def api_login(request):
-    api = DevicewiseHttp()
-    info = api.debugar()
-    return HttpResponse(info)
-
-
-@csrf_exempt
-def coleta_exemplo(request):
-    return render(request, 'dashboard/coleta_exemplo.html')
-
-
-def iniciar_coletas(request):
-    api = DevicewiseColetor()
-    ok = api.coletar_por_usuario(request.user)
-    resposta = 'Coleta efetuada com exito' if ok else 'Erro ao coletar dados'
-    return HttpResponse(resposta)
-
-
-@csrf_exempt
-def por_canal_exemplo(request):
-    return render(request, 'dashboard/coleta_por_canal_exemplo.html')
-
-
-@csrf_exempt
-def api_coletar(request, *args, **kwargs):
-    # Coletando dados da API
-    thing_key = 'hab0001'  # Essa informacao deve estar no cadastro dele
-    api = DevicewiseHttp()
-    dados = api.coletar(thing_key)
-    return JsonResponse(dados, safe=False)
-
-
-@csrf_exempt
-def api_coletar_por_canal(request, *args, **kwargs):
-    thing_key = 'hab0001'
-    canal = 'io_8'
-    antes = '2000-01-01T00:00:00Z'  # as datas estao fixas apenas para demonstacao
-    depois = '2017-12-31T23:59:59Z'
-    api = DevicewiseHttp()
-    dados = api.coletar_por_canal(thing_key, canal, antes, depois)
-    return JsonResponse(dados, safe=False)

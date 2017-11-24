@@ -2,19 +2,22 @@
 from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 from dashboard.models import User
 from apscheduler.schedulers.blocking import BlockingScheduler
+import datetime
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', seconds=3)
-def coletar_tudo():
-    print('------------------------------------------')
-    print('Sincronizando com API (transdutores)')
-    api = DevicewiseColetor()
-    for u in User.objects.all():
-        print('Coletando dados do usuário "%s"' % u.email)
-        if not api.coletar_por_usuario(u):
-            print('Não foi possível coletar dados do usuário "%s"' % u.email)
 
-    print('Todas as leituras foram coletadas com sucesso.')
+@sched.scheduled_job('interval', seconds=10, max_instances=100)
+def coletar_tudo():
+    coletor_api = DevicewiseColetor()
+    agora = str(datetime.datetime.today())
+    print('\n%s ]----------------------------------------------------------------------' % agora)
+    for u in User.objects.all():
+        print('Agendador: Sincronizando com API com usuário %s' % u.email)
+        if not coletor_api.coletar_por_usuario(u):
+            print('Agendador : Não foi possível coletar dados do usuário "%s"' % u.email)
+            return
+
 
 sched.start()
+#sched.terminate()
