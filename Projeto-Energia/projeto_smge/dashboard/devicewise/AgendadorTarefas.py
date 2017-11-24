@@ -12,7 +12,8 @@ def coletar_tudo():
     coletor_api = DevicewiseColetor()
     agora = str(datetime.datetime.today())
     print('\n%s ]----------------------------------------------------------------------' % agora)
-    for u in User.objects.all():
+    usuario = User.objects.all()
+    for u in usuario:
         print('Agendador: Sincronizando com API com usuário %s' % u.email)
         if not coletor_api.coletar_por_usuario(u):
             print('Agendador : Não foi possível coletar dados do usuário "%s"' % u.email)
