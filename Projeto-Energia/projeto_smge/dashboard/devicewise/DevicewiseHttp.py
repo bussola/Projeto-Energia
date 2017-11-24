@@ -19,10 +19,10 @@ class DevicewiseHttp(object):
     thing_key = ""
 
     # Nome do usuario para conectar no servidor.
-    username = 'leandro@habeis.com.br'
+    username = 'brunodrago@e-saveconsultoria.com.br'
 
     # Senha para conectar no servidor.
-    password = 'Hs2017&L'
+    password = 'Aa@203851'
 
     # String JSON do ultimo recebimento do endpoint. ***Usado para debug.
     last_received = ""
