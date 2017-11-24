@@ -2,7 +2,6 @@
 import sys
 from httplib2 import Http
 import simplejson as json
-from django.views.decorators.csrf import csrf_exempt
 
 
 class DevicewiseHttp(object):
@@ -18,21 +17,14 @@ class DevicewiseHttp(object):
     # Identifica o metodo 'thing' que sera executado
     thing_key = ""
 
-<<<<<<< HEAD
     # Nome do usuario para conectar no servidor.
-=======
-    # Nome do usuario para conectar no servidor
->>>>>>> d4d87af116a88152c484395f13bbc860a07da8ac
     username = 'brunodrago@e-saveconsultoria.com.br'
 
     # Senha para conectar no servidor.
     password = 'Aa@203851'
-<<<<<<< HEAD
-=======
 
     # Contem o identificador da sessao atual
     session_id = ""
->>>>>>> d4d87af116a88152c484395f13bbc860a07da8ac
 
     # String JSON do ultimo recebimento do endpoint. ***Usado para debug.
     last_received = ""
@@ -87,7 +79,6 @@ class DevicewiseHttp(object):
 
         return False
 
-
     def set_json_auth(self, json_string):
         if not type(json_string) is dict:
             json_string = json.loads(json_string)
@@ -104,7 +95,6 @@ class DevicewiseHttp(object):
         json_string = json.dumps(json_string)
         return json_string
 
-
     def is_online(self):
         if self.session_id is None or len(self.session_id) <= 0:
             return False
@@ -112,7 +102,6 @@ class DevicewiseHttp(object):
         http = Http(disable_ssl_certificate_validation=True)
         resposta = http.request(self.endpoint, 'POST', string_json)
         return resposta and resposta['dados']['success']
-
 
     def postar(self, string_json):
         self.error = ''
@@ -153,7 +142,6 @@ class DevicewiseHttp(object):
         print(self.response)
         return self.last_status
 
-
     def coletar(self, thing_key):
         string_json = {'auth': {'sessionId': self.session_id},
                        'dados': {'command': 'thing.find', 'params': {'key': thing_key}}}
@@ -170,8 +158,6 @@ class DevicewiseHttp(object):
                 raise Exception('Falha no POST para %s' % self.endpoint)
 
             self.response = json.loads(self.last_received)
-            #print('\nResultado do Post: ')
-            #print(self.response)
 
             if "success" in self.response['dados']:
                 self.last_status = self.response['dados']['success']
@@ -187,7 +173,6 @@ class DevicewiseHttp(object):
 
         return None
 
-
     def obter_resposta(self):
         """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""''
         if self.response['dados']['success'] is False:
@@ -200,13 +185,11 @@ class DevicewiseHttp(object):
 
         return None
 
-
     def obter_canal(self):
         """Retorna a resposta de dados para o ultimo comando se o ultimo foi bem sucedido."""
         if self.last_status and len(self.response['canal']['params']['values']) > 0:
             return self.response['canal']['params']['values']
         return None
-
 
     def obter_opcoes(self):
         """Retorna uma lista de opções. Util para inicialização e objetos existentes de uma sub-classe."""
@@ -220,7 +203,6 @@ class DevicewiseHttp(object):
             "password": self.password
         }
 
-
     def debugar(self):
         """Retorna uma lista de informações para debug após execução do último comando."""
         return {
@@ -230,7 +212,6 @@ class DevicewiseHttp(object):
             "error": self.error
         }
 
-
     def formatar_datatime(self, data):
         """Converte uma string de dados para formato da API."""
         if type(data) is str:
@@ -239,7 +220,6 @@ class DevicewiseHttp(object):
             data_string = data.strftime("%Y-%m-%dT%H:%M:%S%z")
             data_formatada = data_string[:-2] + ':' + data_string[-2:]  # 2004-02-12T15:19:21+00:00
             return data_formatada
-
 
     def coletar_por_canal(self, thing_key, canal, data_inicio, data_fim):
         params = {'thingKey': thing_key, 'key': canal, 'start': data_inicio, 'end': data_fim}
