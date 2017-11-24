@@ -82,10 +82,10 @@ def graficos(request):
 
 def printa(request):
     io11 = Coleta.objects.values_list('io11', flat=True).filter(id_transdutor=1)
-    saida2 = Coleta.objects.values_list('saida2', flat=True).filter(id_transdutor=1)
+    io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1)
     context = {
         'io11': io11,
-        'saida2': saida2,
+        'io12': io12,
     }
     return render(request, 'dashboard/print.html', context)
 
