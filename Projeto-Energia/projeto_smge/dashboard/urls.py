@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^consumomensalporsetores', views.consumo_mensal_por_setores, name='consumo_mensal_setores'),
     url(r'^gasto_mensal', views.gasto_mensal, name='gasto_mensal'),
     url(r'^gastomensalporsetores', views.gasto_mensal_por_setores, name='gasto_mensal_por_setores'),
+    url(r'^printa$', views.printa, name='printa'),
 ]

@@ -80,6 +80,15 @@ def graficos(request):
     }
     return render(request, 'dashboard/graficos.html', context)
 
+def printa(request):
+    saida1 = Coleta.objects.values_list('saida1', flat=True).filter(id_transdutor=1)
+    saida2 = Coleta.objects.values_list('saida2', flat=True).filter(id_transdutor=1)
+    context = {
+        'saida1': saida1,
+        'saida2': saida2,
+    }
+    return render(request, 'dashboard/print.html', context)
+
 
 def do_login(request):
     if request.method == 'GET':
