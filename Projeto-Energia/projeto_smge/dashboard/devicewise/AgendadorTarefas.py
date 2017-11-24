@@ -18,7 +18,7 @@ def coletar_tudo():
         print('Sincronizando com usuário %s' % u.email)
         if not coletor_api.coletar_por_usuario(u):
             print('Agendador : Não foi possível coletar dados do usuário "%s"' % u.email)
-            return
+            #return
 
 
 sched.start()
