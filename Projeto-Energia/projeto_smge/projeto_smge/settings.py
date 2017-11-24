@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,11 @@ EMAIL_HOST_PASSWORD = 'chicogay'
 # EMAIL_HOST_USER = 'no-reply@acessos-smge.com.br'
 # EMAIL_HOST_PASSWORD = 'Energia123'
 EMAIL_PORT = 587
+
+
+CRONJOBS = [
+    ('*/5 * * * *', 'dashboard.cron.coletar_leituras')
+]
 
 
 # Database
