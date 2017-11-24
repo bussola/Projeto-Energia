@@ -81,12 +81,12 @@ def graficos(request):
     return render(request, 'dashboard/graficos.html', context)
 
 def printa(request):
-    io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1)
-    io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1)
-    io9 = Coleta.objects.values_list('io9', flat=True).filter(id_transdutor=1)
-    io10 = Coleta.objects.values_list('io10', flat=True).filter(id_transdutor=1)
-    io11 = Coleta.objects.values_list('io11', flat=True).filter(id_transdutor=1)
-    io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1)
+    io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io9 = Coleta.objects.values_list('io9', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io10 = Coleta.objects.values_list('io10', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io11 = Coleta.objects.values_list('io11', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1).order_by('-id')[0]
     context = {
         'io7': io7,
         'io8': io8,
