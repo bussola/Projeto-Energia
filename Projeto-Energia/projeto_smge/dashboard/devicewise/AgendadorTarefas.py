@@ -13,6 +13,7 @@ def coletar_tudo():
     print('\n%s ]----------------------------------------------------------------------' % agora)
     coletor_api = DevicewiseColetor()
     usuarios = User.objects.all()
+    print(len(usuarios))
     for u in usuarios:
         print('Sincronizando com usuário %s' % u.email)
         if not coletor_api.coletar_por_usuario(u):
