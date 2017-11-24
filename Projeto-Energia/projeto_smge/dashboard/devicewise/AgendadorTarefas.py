@@ -13,7 +13,7 @@ def coletar_tudo():
     agora = str(datetime.datetime.today())
     print('\n%s ]----------------------------------------------------------------------' % agora)
     for u in User.objects.all():
-        print('Agendador: Sincronizando com API com usuário %s' % u.email)
+        print('Sincronizando com usuário %s' % u.email)
         if not coletor_api.coletar_por_usuario(u):
             print('Agendador : Não foi possível coletar dados do usuário "%s"' % u.email)
             return

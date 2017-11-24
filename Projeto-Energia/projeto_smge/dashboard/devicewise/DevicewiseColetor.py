@@ -16,6 +16,7 @@ class DevicewiseColetor(object):
             return False
 
         for t in transdutores:
+            print('Transdutor: %s' % t.chave_api)
             dados = self.api.coletar(t.chave_api)
             if dados and len(dados) > 0:
                 data_ultima_leitura = dados['lastCommunication']

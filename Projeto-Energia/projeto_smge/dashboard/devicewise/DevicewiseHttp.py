@@ -149,8 +149,6 @@ class DevicewiseHttp(object):
         string_json = json.dumps(string_json)
 
         try:
-            #print('\nString Json do POST: ')
-            #print(string_json)
             http_obj = Http(disable_ssl_certificate_validation=True)
             result, self.last_received = http_obj.request(self.endpoint, 'POST', string_json)
 
@@ -162,11 +160,15 @@ class DevicewiseHttp(object):
             if "success" in self.response['dados']:
                 self.last_status = self.response['dados']['success']
 
-            if self.last_status and len(self.response['dados']['params']['properties']) > 0:
+            conectado = ("connected" in self.response['dados']['params'] and self.response['dados']['params']['connected'] is True)
+
+            if self.last_status and conectado and len(self.response['dados']['params']['properties']) > 0:
                 self.response['dados']['params']['properties']['lastCommunication'] = self.response['dados']['params'][
                     'lastCommunication']
                 print('Transdutor %s SINCRONIZADO' % thing_key)
                 return self.response['dados']['params']['properties']
+            else:
+                print('Transdutor não existe ou está desconectado (offline)...')
         except:
             print('\nOcorreu um erro (Exception):')
             print(sys.exc_info())
