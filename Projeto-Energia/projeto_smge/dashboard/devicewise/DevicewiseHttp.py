@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
+import sys
 from httplib2 import Http
 import simplejson as json
 from django.views.decorators.csrf import csrf_exempt
 
 
 class DevicewiseHttp(object):
-    # Mantidas as mesmas nomenclaturas que a API usa
     # Endpoint da API (url)
     endpoint = 'http://api.devicewise.com/api'
 
     # Identificador da aplicacao
-    app_id = "hab0001"
+    app_id = ""
 
     # Token da aplicacao
     app_token = ""
@@ -18,11 +18,14 @@ class DevicewiseHttp(object):
     # Identifica o metodo 'thing' que sera executado
     thing_key = ""
 
-    # Nome do usuario para conectar no servidor.
-    username = 'leandro@habeis.com.br'
+    # Nome do usuario para conectar no servidor
+    username = 'brunodrago@e-saveconsultoria.com.br'
 
     # Senha para conectar no servidor.
-    password = 'Hs2017&L'
+    password = 'Aa@203851'
+
+    # Contem o identificador da sessao atual
+    session_id = ""
 
     # String JSON do ultimo recebimento do endpoint. ***Usado para debug.
     last_received = ""
