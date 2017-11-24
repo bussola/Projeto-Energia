@@ -87,9 +87,9 @@ EMAIL_HOST_PASSWORD = 'chicogay'
 EMAIL_PORT = 587
 
 
-CRONJOBS = [
-    ('*/5 * * * *', 'dashboard.cron.coletar_leituras')
-]
+# CRONJOBS = [
+#     ('*/5 * * * *', 'dashboard.cron.coletar_leituras')
+# ]
 
 
 # Database
