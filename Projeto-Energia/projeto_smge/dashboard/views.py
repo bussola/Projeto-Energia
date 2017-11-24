@@ -82,6 +82,8 @@ def graficos(request):
 
 def printa(request):
     io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[0]
+    io7a = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[1]
+    io7b = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[2]
     io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1).order_by('-id')[0]
     io9 = Coleta.objects.values_list('io9', flat=True).filter(id_transdutor=1).order_by('-id')[0]
     io10 = Coleta.objects.values_list('io10', flat=True).filter(id_transdutor=1).order_by('-id')[0]
@@ -89,6 +91,8 @@ def printa(request):
     io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1).order_by('-id')[0]
     context = {
         'io7': io7,
+        'io7a': io7a,
+        'io7b': io7b,
         'io8': io8,
         'io9': io9,
         'io10': io10,
