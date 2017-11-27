@@ -98,12 +98,22 @@ $.ajax({
     url: '/gasto_mensal/',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
+    data: { mes: mes_atual },
     success: function(data) {
+        console.log(data);
+        xKey = 'Dia';
+        yKeys = ['Consumo'];
+        labels = ['Consumo'];
+        bindBar('chartGastoMensal', data, xKey, yKeys, labels);
+    },
+
+    
+<!--     success: function(data) {
         xKey = 'Dia';
         yKeys = ['Valor'];
         labels = ['Valor'];
         bindLines('chartGastoMensal', data, xKey, yKeys, labels);
-    },
+    }, -->
     error: function(error_data){
         console.log(error_data);
     }
