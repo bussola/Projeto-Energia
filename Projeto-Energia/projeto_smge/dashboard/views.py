@@ -159,39 +159,27 @@ def consumo_mensal_por_setores(request, *args, **kargs):
     return JsonResponse(data2, safe=False)
 
 
-# def gasto_mensal(request, *args, **kargs):
-#     data3 = [
-#         {'Dia': '01', 'Valor': 51333},
-#         {'Dia': '02', 'Valor': 30222},
-#         {'Dia': '03', 'Valor': 20442},
-#         {'Dia': '04', 'Valor': 20123},
-#         {'Dia': '05', 'Valor': 32333},
-#         {'Dia': '06', 'Valor': 44963},
-#     ]
-#     return JsonResponse(data3, safe=False)
+def gasto_mensal(request, *args, **kargs):
+    data3 = [
+        {'Dia': '01', 'Valor': 51333},
+        {'Dia': '02', 'Valor': 30222},
+        {'Dia': '03', 'Valor': 20442},
+        {'Dia': '04', 'Valor': 20123},
+        {'Dia': '05', 'Valor': 32333},
+        {'Dia': '06', 'Valor': 44963},
+    ]
+    return JsonResponse(data3, safe=False)
 
 
 def gasto_mensal(request, *args, **kargs):
-    mes = request.GET['mes']  # TODO: avaliar a forma como isso ta sendo feito
-    data3 = []
-    transdutores = Transdutor.objects.filter(id_cliente=request.user.id)
-    for t in transdutores:
-        coletas = Coleta.objects.filter(id_transdutor_id=t.id, data_leitura__month=mes).order_by('data_leitura')
-        for c in coletas:
-            # soma os valores dos canais
-            valores = [float(c.io6), float(c.io7), float(c.io8), float(c.io9), float(c.io10), float(c.io11),
-                       float(c.io12)]
-            soma = sum(valores)
-            dia = int(c.data_leitura.day)
-            adicionado = False
-            for dado in data3:
-                if dado['Dia'] == dia:
-                    novo_valor = float(dado['Consumo']) + soma
-                    dado['Consumo'] = "%.4f" % novo_valor
-                    adicionado = True
-
-            if not adicionado:
-                data3.append({'Dia': dia, 'Consumo': "%.4f" % soma})
+    data3 = [
+        {'Dia': '01', 'Valor': 51333},
+        {'Dia': '02', 'Valor': 30222},
+        {'Dia': '03', 'Valor': 20442},
+        {'Dia': '04', 'Valor': 20123},
+        {'Dia': '05', 'Valor': 32333},
+        {'Dia': '06', 'Valor': 44963},
+    ]
     return JsonResponse(data3, safe=False)
 
 
