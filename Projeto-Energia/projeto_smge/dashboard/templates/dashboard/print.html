@@ -30,8 +30,8 @@
             {% for item in teste %}
             <tr>
                 <td>{{ item.data_leitura }}</td>
-                <td>{{ int(item.io6) }}</td>
-        	    <td>{{ int(item.io6)|mul:parametro_a|addition:parametro_b }} </td>
+                <td>{% int(item.io6) %}</td>
+        	    <td>{% int(item.io6)|mul:parametro_a|addition:parametro_b %} </td>
                 <td>{{ item.io7 }}</td>
                 <td>{{ item.io8 }}</td>
                 <td>{{ parametro_a }}</td>
