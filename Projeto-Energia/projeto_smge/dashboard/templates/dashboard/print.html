@@ -19,23 +19,23 @@
     <body>
         <table style="width:100%">
             <tr>
+                <th>Data</th>
                 <th>IO 6</th>
                 <th>IO 6 - Calculado</th>
-                <th>Parametro A</th>
-                <th>Parametro B</th>
                 <th>IO 7</th>
                 <th>IO 8</th>
-                <th>Data</th>
+                <th>Parametro A</th>
+                <th>Parametro B</th>
             </tr>
             {% for item in teste %}
             <tr>
+                <td>{{ item.data_leitura }}</td>
                 <td>{{ item.io6 }}</td>
         	    <td>R$ {{ item.io6|mul:parametro_a|addition:parametro_b }} </td>
-                <td>{{ parametro_a }}</td>
-                <td>{{ parametro_b }}</td>
                 <td>{{ item.io7 }}</td>
                 <td>{{ item.io8 }}</td>
-        	    <td>{{ item.data_leitura }}</td>
+                <td>{{ parametro_a }}</td>
+                <td>{{ parametro_b }}</td>
             </tr>
             {% endfor %}
         </table>
