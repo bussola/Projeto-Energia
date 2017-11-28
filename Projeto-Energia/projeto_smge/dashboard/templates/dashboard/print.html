@@ -28,7 +28,7 @@ th {
     {% for item in teste %}
     <tr>
         <td>{{ item.io6 }}</td>
-	<td>{{ constante }} </td>
+	<td>{{ item.io6|add:"10" }} </td>
         <td>{{ item.io7 }}</td>
         <td>{{ item.io8 }}</td>
 	<td>{{ item.data_leitura }}</td>
