@@ -167,40 +167,40 @@ def consumo_mensal_por_setores(request, *args, **kargs):
     return JsonResponse(data2, safe=False)
 
 
-def gasto_mensal(request, *args, **kargs):
-    mes = request.GET['mes']  # TODO: avaliar a forma como isso ta sendo feito
-    data3 = []
-    transdutores1 = Transdutor.objects.filter(id_cliente=request.user.id)
-    for t in transdutores1:
-        coletas1 = Coleta.objects.filter(id_transdutor_id=t.id, data_leitura__month=mes).order_by('data_leitura')
-        for c in coletas1:
-            # soma os valores dos canais
-            valores1 = [float(c.io6), float(c.io7), float(c.io8), float(c.io9), float(c.io10), float(c.io11),
-                       float(c.io12)]
-            soma1 = sum(valores1)
-            dia1 = int(c.data_leitura.day)
-            adicionado1 = False
-            for dado in data3:
-                if dado['Dia'] == dia1:
-                    novo_valor1 = float(dado['Valor']) + soma1
-                    dado['Valor'] = "%.4f" % novo_valor1
-                    adicionado1 = True
-
-            if not adicionado1:
-                data3.append({'Dia': dia1, 'Valor': "%.4f" % soma1})
-    return JsonResponse(data3, safe=False)
-
-
 # def gasto_mensal(request, *args, **kargs):
-#     data3 = [
-#         {'Dia': '01', 'Valor': 51333},
-#         {'Dia': '02', 'Valor': 30222},
-#         {'Dia': '03', 'Valor': 20442},
-#         {'Dia': '04', 'Valor': 20123},
-#         {'Dia': '05', 'Valor': 32333},
-#         {'Dia': '06', 'Valor': 44963},
-#     ]
+#     mes = request.GET['mes']  # TODO: avaliar a forma como isso ta sendo feito
+#     data3 = []
+#     transdutores1 = Transdutor.objects.filter(id_cliente=request.user.id)
+#     for t in transdutores1:
+#         coletas1 = Coleta.objects.filter(id_transdutor_id=t.id, data_leitura__month=mes).order_by('data_leitura')
+#         for c in coletas1:
+#             # soma os valores dos canais
+#             valores1 = [float(c.io6), float(c.io7), float(c.io8), float(c.io9), float(c.io10), float(c.io11),
+#                        float(c.io12)]
+#             soma1 = sum(valores1)
+#             dia1 = int(c.data_leitura.day)
+#             adicionado1 = False
+#             for dado in data3:
+#                 if dado['Dia'] == dia1:
+#                     novo_valor1 = float(dado['Valor']) + soma1
+#                     dado['Valor'] = "%.4f" % novo_valor1
+#                     adicionado1 = True
+
+#             if not adicionado1:
+#                 data3.append({'Dia': dia1, 'Valor': "%.4f" % soma1})
 #     return JsonResponse(data3, safe=False)
+
+
+def gasto_mensal(request, *args, **kargs):
+    data3 = [
+        {'Dia': '01', 'Valor': 51333},
+        {'Dia': '02', 'Valor': 30222},
+        {'Dia': '03', 'Valor': 20442},
+        {'Dia': '04', 'Valor': 20123},
+        {'Dia': '05', 'Valor': 32333},
+        {'Dia': '06', 'Valor': 44963},
+    ]
+    return JsonResponse(data3, safe=False)
 
 
 def gasto_mensal_por_setores(request, *args, **kargs):
