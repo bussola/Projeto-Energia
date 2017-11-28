@@ -85,6 +85,7 @@ def printa(request):
     parametros = Transdutor.objects.all().filter(chave_api="hab0001").order_by('-id')
     parametro_a = Transdutor.objects.values_list('parametro_a', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
     parametro_b = Transdutor.objects.values_list('parametro_b', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
+    parametro_a_int = int(parametro_a)
     io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
@@ -97,6 +98,7 @@ def printa(request):
         'parametros': parametros,
     	'parametro_a': parametro_a,
     	'parametro_b': parametro_b,
+        'parametro_a_int': parametro_a_int,
         'teste': teste,
         'io6': io6,
         'io7': io7,
