@@ -81,6 +81,7 @@ def graficos(request):
     return render(request, 'dashboard/graficos.html', context)
 
 def printa(request):
+    teste = Coleta.objects.all()
     io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
@@ -90,6 +91,7 @@ def printa(request):
     io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
+        'teste': teste,
         'io6': io6,
         'io7': io7,
         'io8': io8,

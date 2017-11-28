@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yp^0acn$=^h+-jc--55e96r_am1yc06*+@ww_v4g3b*)0az+l)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['50.116.54.138', '127.0.0.1', 'www.acessos-smge.com.br', 'acessos-smge.com.br']
 

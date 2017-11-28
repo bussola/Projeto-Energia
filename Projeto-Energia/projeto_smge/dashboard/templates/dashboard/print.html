@@ -1,17 +1,38 @@
-io6: {{io6}}
-<br>
-io7: {{io7}}
-<br>
-io8: {{io8}}
-<br>
-io9: {{io9}}
-<br>
-io10: {{io10}}
-<br>
-io11: {{io11}}
-<br>
-io12: {{io12}}
-<br><br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
 
-<td> Data </td>
-<td> {{data}} </td>
+
+<table style="width:100%">
+    <tr>
+        <th>IO 6</th>
+        <th>IO 7</th>
+        <th>IO 8</th>
+        <th>Data</th>
+    </tr>
+    {% for item in teste %}
+    <tr>
+        <td>{{ item.io6 }}</td>
+        <td>{{ item.io7 }}</td>
+        <td>{{ item.io8 }}</td>
+	<td>{{ item.data_leitura }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
