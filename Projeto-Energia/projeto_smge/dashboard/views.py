@@ -95,8 +95,8 @@ def printa(request):
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
         'parametros': parametros,
-	'parametro_a': parametro_a,
-	'parametro_b': parametro_b,
+    	'parametro_a': parametro_a,
+    	'parametro_b': parametro_b,
         'teste': teste,
         'io6': io6,
         'io7': io7,
