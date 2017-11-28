@@ -82,17 +82,21 @@ def graficos(request):
 
 def printa(request):
     teste = Coleta.objects.all().order_by('-id')
-    constante = 3
+    parametros = Transdutor.objects.all().filter(chave_api="hab0001").order_by('-id')
+    parametro_a = Transdutor.objects.values_list('parametro_a', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
+    parametro_b = Transdutor.objects.values_list('parametro_b', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
     io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io7 = Coleta.objects.values_list('io7', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io8 = Coleta.objects.values_list('io8', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
-    io9 = Coleta.objects.values_list('io9', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
+    io9 = Coleta.objects.values_list('io9', flat=True).filter(id_transdutor=1).order_by('-id')[:10]    
     io10 = Coleta.objects.values_list('io10', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io11 = Coleta.objects.values_list('io11', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     io12 = Coleta.objects.values_list('io12', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
-	'constante': constante,
+        'parametros': parametros,
+	'parametro_a': parametro_a,
+	'parametro_b': parametro_b,
         'teste': teste,
         'io6': io6,
         'io7': io7,
