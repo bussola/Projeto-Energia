@@ -130,6 +130,8 @@ class Coleta(models.Model):
     io11 = models.CharField(max_length=255, null=True)
     io12 = models.CharField(max_length=255, null=True)
     id_transdutor = models.ForeignKey(Transdutor, on_delete=models.CASCADE)
+    def conta(self):
+        return self.io6 * 10
 
 
 class Conta_contrato(models.Model):
