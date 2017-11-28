@@ -20,6 +20,7 @@ th {
 <table style="width:100%">
     <tr>
         <th>IO 6</th>
+	<th>IO 6 - R$</th>
         <th>IO 7</th>
         <th>IO 8</th>
         <th>Data</th>
@@ -27,6 +28,7 @@ th {
     {% for item in teste %}
     <tr>
         <td>{{ item.io6 }}</td>
+	<td>R$ {% widthratio item.io6 1 10 %} </td>
         <td>{{ item.io7 }}</td>
         <td>{{ item.io8 }}</td>
 	<td>{{ item.data_leitura }}</td>
