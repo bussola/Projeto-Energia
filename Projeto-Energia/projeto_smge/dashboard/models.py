@@ -106,6 +106,10 @@ class Transdutor(models.Model):
     chave_api = models.CharField(max_length=25, default='', blank=True) #T TODO: precisamos verificar se KEY cadastrado existe em algum equipamento
     id_cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     id_classificacao = models.ForeignKey(Classificacao, on_delete=models.CASCADE)
+    parametro_a = models.CharField(max_length=255)
+    parametro_b = models.CharField(max_length=255)
+    hora_ponto_inicio = models.TimeField('Hora inicio') 
+    hora_ponto_fim = models.TimeField('Hora fim')
 
     def __str__(self):
         return (self.numero_serie)
