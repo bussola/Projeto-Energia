@@ -130,9 +130,10 @@ class Coleta(models.Model):
     io11 = models.CharField(max_length=255, null=True)
     io12 = models.CharField(max_length=255, null=True)
     id_transdutor = models.ForeignKey(Transdutor, on_delete=models.CASCADE)
-    def conta(num):
-        return num * 10
-
+    #@register.filter
+    #def mult(num, num2):
+    #    return int(num) * int(num2)
+    #mult.is_safe - False
 
 class Conta_contrato(models.Model):
     conta_contrato = models.CharField(max_length=255)

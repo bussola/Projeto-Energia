@@ -34,6 +34,7 @@ MANAGERS = ADMINS
 # Application definition
 
 INSTALLED_APPS = [
+    'mathfilters',
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',

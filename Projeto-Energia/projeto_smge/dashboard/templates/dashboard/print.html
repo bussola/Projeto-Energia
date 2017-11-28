@@ -1,3 +1,4 @@
+{% load mathfilters %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@ th {
     {% for item in teste %}
     <tr>
         <td>{{ item.io6 }}</td>
-	<td>{{ item.io6|add:"10" }} </td>
+	<td>R$ {{ item.io6|mul:"0.1"|addition:"0.5" }} </td>
         <td>{{ item.io7 }}</td>
         <td>{{ item.io8 }}</td>
 	<td>{{ item.data_leitura }}</td>
