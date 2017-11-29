@@ -116,7 +116,7 @@ class Transdutor(models.Model):
     nome_io9 = models.CharField(max_length=255, blank=False)
     nome_io10 = models.CharField(max_length=255, blank=False)
     nome_io11 = models.CharField(max_length=255, blank=False)
-    nome_io12 = models.CharField(max_length=255, blank=False)
+    nome_io12 = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return (self.numero_serie)
