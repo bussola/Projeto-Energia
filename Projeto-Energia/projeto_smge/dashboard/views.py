@@ -82,7 +82,7 @@ def graficos(request):
 
 def printa(request):
     teste = Coleta.objects.all().order_by('-id')
-    io6_name = Transdutor.objects.values_list('nome_io6', flat=False).filter(chave_api="hab0001")
+    io6_name = Transdutor.objects.values('nome_io6', flat=True).filter(chave_api="hab0001")
     parametros = Transdutor.objects.all().filter(chave_api="hab0001").order_by('-id')
     parametro_a = Transdutor.objects.values_list('parametro_a', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
     parametro_b = Transdutor.objects.values_list('parametro_b', flat=True).filter(chave_api="hab0001").order_by('-id')[0]
