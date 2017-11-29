@@ -2,7 +2,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib import messages
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -82,8 +82,15 @@ def graficos(request):
     return render(request, 'dashboard/graficos.html', context)
 
 def printa(request):
-    filtro = Coleta.objects.all().annotate(Count('io6'))
+    #filtro = Coleta.objects.all().annotate(Count('io6'))
     #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
+    last_5_min = datetime.now() - timedelta(seconds=5*60)
+    filtro = (Coleta.objects
+    .filter(data_leitura__gt=last_5_min)
+    .extra(select={'day': 'date(data_leitura)'})
+    .values('day')
+    .annotate(sum=Sum('io6')))
+
     teste = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
     #io6_name = Transdutor.objects.values_list('nome_io6', flat=True).filter(chave_api="hab0001")
