@@ -17,6 +17,7 @@ from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 from dashboard.devicewise.DevicewiseColetor import DevicewiseColetor
 import datetime
 from datetime import timedelta
+from timedelta import now
 from django.core.urlresolvers import reverse
 
 
