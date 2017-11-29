@@ -134,12 +134,12 @@ class Servico(models.Model):
 class Coleta(models.Model):
     data_leitura = models.DateTimeField(null=True)  # TODO: MUdar isso depois
     io6 = models.FloatField(max_length=255, null=True)
-    io7 = models.CharField(max_length=255, null=True)
-    io8 = models.CharField(max_length=255, null=True)
-    io9 = models.CharField(max_length=255, null=True)
-    io10 = models.CharField(max_length=255, null=True)
-    io11 = models.CharField(max_length=255, null=True)
-    io12 = models.CharField(max_length=255, null=True)
+    io7 = models.FloatField(max_length=255, null=True)
+    io8 = models.FloatField(max_length=255, null=True)
+    io9 = models.FloatField(max_length=255, null=True)
+    io10 = models.FloatField(max_length=255, null=True)
+    io11 = models.FloatField(max_length=255, null=True)
+    io12 = models.FloatField(max_length=255, null=True)
     id_transdutor = models.ForeignKey(Transdutor, on_delete=models.CASCADE)
 
 
