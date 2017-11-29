@@ -111,11 +111,11 @@ class Transdutor(models.Model):
     hora_ponto_inicio = models.TimeField('Hora inicio') 
     hora_ponto_fim = models.TimeField('Hora fim')
     nome_io6 = models.CharField(max_length=255)
-    nome_io7 = models.CharField(max_length=255, blank=False)
-    nome_io8 = models.CharField(max_length=255, blank=False)
-    nome_io9 = models.CharField(max_length=255, blank=False)
-    nome_io10 = models.CharField(max_length=255, blank=False)
-    nome_io11 = models.CharField(max_length=255, blank=False)
+    nome_io7 = models.CharField(max_length=255, blank=True)
+    nome_io8 = models.CharField(max_length=255, blank=True)
+    nome_io9 = models.CharField(max_length=255, blank=True)
+    nome_io10 = models.CharField(max_length=255, blank=True)
+    nome_io11 = models.CharField(max_length=255, blank=True)
     nome_io12 = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
