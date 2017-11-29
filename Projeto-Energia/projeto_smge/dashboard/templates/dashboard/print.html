@@ -20,7 +20,9 @@
         <table style="width:100%">
             <tr>
                 <th>Data</th>
-                <th>{{ transdutores[0] }}</th>
+                {% for tran in transdutores %}
+                <th>{{ tran.nome_io6 }}</th>
+                {% endfor %}
                 <th>IO 6 - Calculado</th>
                 <th>IO 7</th>
                 <th>IO 7 - Calculado</th>
