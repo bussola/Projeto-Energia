@@ -103,7 +103,7 @@ class Classificacao(models.Model):
 class Transdutor(models.Model):
     data_instalacao = models.DateTimeField('Data instalacao')
     numero_serie = models.CharField(max_length=255)
-    chave_api = models.CharField(max_length=25, default='', blank=True) #T TODO: precisamos verificar se KEY cadastrado existe em algum equipamento
+    chave_api = models.CharField(max_length=25, default='', blank=False) #T TODO: precisamos verificar se KEY cadastrado existe em algum equipamento
     id_cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     id_classificacao = models.ForeignKey(Classificacao, on_delete=models.CASCADE)
     parametro_a = models.CharField(max_length=255)
@@ -111,12 +111,12 @@ class Transdutor(models.Model):
     hora_ponto_inicio = models.TimeField('Hora inicio') 
     hora_ponto_fim = models.TimeField('Hora fim')
     nome_io6 = models.CharField(max_length=255)
-    nome_io7 = models.CharField(max_length=255)
-    nome_io8 = models.CharField(max_length=255)
-    nome_io9 = models.CharField(max_length=255)
-    nome_io10 = models.CharField(max_length=255)
-    nome_io11 = models.CharField(max_length=255)
-    nome_io12 = models.CharField(max_length=255)
+    nome_io7 = models.CharField(max_length=255, blank=False)
+    nome_io8 = models.CharField(max_length=255, blank=False)
+    nome_io9 = models.CharField(max_length=255, blank=False)
+    nome_io10 = models.CharField(max_length=255, blank=False)
+    nome_io11 = models.CharField(max_length=255, blank=False)
+    nome_io12 = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
         return (self.numero_serie)
