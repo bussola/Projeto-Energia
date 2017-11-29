@@ -81,6 +81,8 @@ def graficos(request):
     return render(request, 'dashboard/graficos.html', context)
 
 def printa(request):
+    filtro = Coleta.objects.all().annotate(Count('io6'))
+    #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
     teste = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
     #io6_name = Transdutor.objects.values_list('nome_io6', flat=True).filter(chave_api="hab0001")
@@ -92,6 +94,7 @@ def printa(request):
     # io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
+        'filtro': filtro,
         'transdutores': transdutores,
         'parametro_a_float': parametro_a_float,
         'parametro_b_float': parametro_b_float,
