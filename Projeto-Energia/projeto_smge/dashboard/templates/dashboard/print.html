@@ -24,9 +24,13 @@
                 <th>{{ tran.nome_io6 }}</th>
                 {% endfor %}
                 <th>IO 6 - Calculado</th>
-                <th>IO 7</th>
+                {% for tran in transdutores %}
+                <th>{{ tran.nome_io7 }}</th>
+                {% endfor %}
                 <th>IO 7 - Calculado</th>
-                <th>IO 8</th>
+                {% for tran in transdutores %}
+                <th>{{ tran.nome_io8 }}</th>
+                {% endfor %}
                 <th>IO 8 - Calculado</th>
                 <th>Soma das IOs</th>
                 <th>Parametro A</th>
