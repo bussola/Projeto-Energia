@@ -23,7 +23,9 @@
                 <th>IO 6</th>
                 <th>IO 6 - Calculado</th>
                 <th>IO 7</th>
+                <th>IO 7 - Calculado</th>
                 <th>IO 8</th>
+                <th>IO 8 - Calculado</th>
                 <th>Parametro A</th>
                 <th>Parametro B</th>
             </tr>
@@ -33,7 +35,9 @@
                 <td>{{ item.io6 }}</td>
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
+                <td>{{ item.io7|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io8 }}</td>
+                <td>{{ item.io8|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ parametro_a_float }}</td>
                 <td>{{ parametro_b_float }}</td>
             </tr>
