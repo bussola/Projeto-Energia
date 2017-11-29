@@ -110,6 +110,13 @@ class Transdutor(models.Model):
     parametro_b = models.CharField(max_length=255)
     hora_ponto_inicio = models.TimeField('Hora inicio') 
     hora_ponto_fim = models.TimeField('Hora fim')
+    nome_io6 = models.CharField(max_length=255)
+    nome_io7 = models.CharField(max_length=255)
+    nome_io8 = models.CharField(max_length=255)
+    nome_io9 = models.CharField(max_length=255)
+    nome_io10 = models.CharField(max_length=255)
+    nome_io11 = models.CharField(max_length=255)
+    nome_io12 = models.CharField(max_length=255)
 
     def __str__(self):
         return (self.numero_serie)
@@ -134,10 +141,7 @@ class Coleta(models.Model):
     io11 = models.CharField(max_length=255, null=True)
     io12 = models.CharField(max_length=255, null=True)
     id_transdutor = models.ForeignKey(Transdutor, on_delete=models.CASCADE)
-    #@register.filter
-    #def mult(num, num2):
-    #    return int(num) * int(num2)
-    #mult.is_safe - False
+
 
 class Conta_contrato(models.Model):
     conta_contrato = models.CharField(max_length=255)
