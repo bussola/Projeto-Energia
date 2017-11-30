@@ -170,6 +170,7 @@ def consumo_mensal(request, *args, **kargs):
 
 
 def consumo_mensal_por_setores(request, *args, **kargs):
+    #io6_name = Transdutor.objects.values_list('nome_io6', flat=True).filter(chave_api="hab0001")
     data2 = [
         {'value': 2554, 'label': 'Industria'},
         {'value': 242, 'label': 'Oficina'},
