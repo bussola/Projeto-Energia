@@ -93,6 +93,12 @@ def printa(request):
     .values('day')
     .annotate(sum=Sum('io6')))
 
+    qnt = (Coleta.objects
+    .filter(data_leitura__gt=last_5_min)
+    .extra(select={'day': 'date(data_leitura)'})
+    .values('day')
+    .annotate(count=Count('io6')))
+
     teste = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
     #io6_name = Transdutor.objects.values_list('nome_io6', flat=True).filter(chave_api="hab0001")
@@ -104,6 +110,7 @@ def printa(request):
     # io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
+        'qnt': qnt,
         'filtro': filtro,
         'transdutores': transdutores,
         'parametro_a_float': parametro_a_float,
