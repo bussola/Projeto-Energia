@@ -24,7 +24,9 @@
                 <th>{{ tran.nome_io6 }}</th>
                 {% endfor %}
 		        <th> Media - 5 min </th>
-                <th>{{qnt}}</th>
+                {% for shero in qnt %}
+                <th>{{shero.count}}</th>
+                {% endfor %}
                 <th>IO 6 - Calculado</th>
                 {% for tran in transdutores %}
                 <th>{{ tran.nome_io7 }}</th>
