@@ -99,7 +99,7 @@ def printa(request):
     .values('day')
     .annotate(count=Count('io6')))
 
-    teste = Coleta.objects.all().order_by('-id')
+    coletas = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
     #io6_name = Transdutor.objects.values_list('nome_io6', flat=True).filter(chave_api="hab0001")
     parametros = Transdutor.objects.all().filter(chave_api="hab0001").order_by('-id')
@@ -115,7 +115,7 @@ def printa(request):
         'transdutores': transdutores,
         'parametro_a_float': parametro_a_float,
         'parametro_b_float': parametro_b_float,
-        'teste': teste,
+        'coletas': coletas,
         #'io6_name': io6_name,
         'data': data,
     }

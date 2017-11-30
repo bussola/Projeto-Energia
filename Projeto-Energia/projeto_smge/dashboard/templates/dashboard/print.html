@@ -24,7 +24,7 @@
                 <th>{{ tran.nome_io6 }}</th>
                 {% endfor %}
 		        <th> Media - 5 min </th>
-                <th>Teste</th>
+                <th>{{qnt}}</th>
                 <th>IO 6 - Calculado</th>
                 {% for tran in transdutores %}
                 <th>{{ tran.nome_io7 }}</th>
@@ -38,7 +38,7 @@
                 <th>Parametro A</th>
                 <th>Parametro B</th>
             </tr>
-            {% for item in teste %}
+            {% for item in coletas %}
             <tr>
                 <td>{{ item.data_leitura }}</td>
                 <td>{{ item.io6 }}</td>
@@ -46,7 +46,7 @@
                 {% for fil in filtro %}
                 <th>{{ fil.sum }}</th>
                 {% endfor %}
-                <td>{{qnt}}</td>
+                <td>teste</td>
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
                 <td>{{ item.io7|mul:parametro_a_float|addition:parametro_b_float }} </td>
