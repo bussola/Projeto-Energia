@@ -43,7 +43,7 @@
                 <td>{{ item.io6 }}</td>
 <!-- 		        <td> {{ filtro }} </td> -->
                 {% for fil in filtro %}
-                <th>{{ fil.sum<!-- |div:qnt.count --> }}</th>
+                <th>{{ fil.sum }}</th>
                 {% endfor %}
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
