@@ -97,9 +97,9 @@ def printa(request):
     .filter(data_leitura__gt=last_5_min)
     .extra(select={'day': 'date(data_leitura)'})
     .values('day')
-    .annotate(count=Count('io6')))
+    .annotate(contador=Count('io6')))
     for q in qnt_dados:
-        qnt = q.count
+        qnt = q.contador
 
     coletas = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
