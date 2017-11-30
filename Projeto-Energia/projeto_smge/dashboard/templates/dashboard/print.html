@@ -19,7 +19,7 @@
     <body>
         <table style="width:100%">
             <tr>
-                <th>Data</th>
+                <th>{{qnt}}}</th>
                 {% for tran in transdutores %}
                 <th>{{ tran.nome_io6 }}</th>
                 {% endfor %}
@@ -43,7 +43,7 @@
                 <td>{{ item.io6 }}</td>
 <!-- 		        <td> {{ filtro }} </td> -->
                 {% for fil in filtro %}
-                <th>{{ fil|div:qnt }}</th>
+                <th>{{ fil }}</th>
                 {% endfor %}
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
