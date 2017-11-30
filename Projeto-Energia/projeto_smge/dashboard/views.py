@@ -95,8 +95,6 @@ def printa(request):
 
     qnt = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
-    .extra(select={'day': 'date(data_leitura)'})
-    .values('day')
     .annotate(count=Count('io6')))
 
     teste = Coleta.objects.all().order_by('-id')
