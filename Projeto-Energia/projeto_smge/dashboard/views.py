@@ -87,21 +87,17 @@ def printa(request):
     #filtro = Coleta.objects.all().annotate(Count('io6'))
     #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
     last_5_min = datetime.now() - timedelta(seconds=5*60)
-    filtro_dados = (Coleta.objects
+    filtro = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
     .extra(select={'day': 'date(data_leitura)'})
     .values('day')
     .annotate(sum=Sum('io6')))
 
-    fltro = filtro_dados.sum
-
-    qnt_dados = (Coleta.objects
+    qnt = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
     .extra(select={'day': 'date(data_leitura)'})
     .values('day')
     .annotate(count=Count('io6')))
-
-    qnt = qnt_dados.count
 
     teste = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
