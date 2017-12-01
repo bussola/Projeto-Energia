@@ -100,7 +100,7 @@ def printa(request):
     .values('day')
     .annotate(contador=Count('io6')))
     for q in qnt_dados:
-        qnt = q.contador
+        qnt = q['contador']
 
     coletas = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
