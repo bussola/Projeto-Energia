@@ -87,11 +87,12 @@ def printa(request):
     #filtro = Coleta.objects.all().annotate(Count('io6'))
     #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
     last_5_min = datetime.now() - timedelta(seconds=5*60)
-    filtro = (Coleta.objects
+    soma_5_min = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
     .extra(select={'day': 'date(data_leitura)'})
     .values('day')
     .annotate(sum=Sum('io6')))
+    filtro = soma_5_min
 
     qnt_dados = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
