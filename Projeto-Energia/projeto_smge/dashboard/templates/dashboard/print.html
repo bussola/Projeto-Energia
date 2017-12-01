@@ -1,8 +1,5 @@
 {% load mathfilters %}
-
-{% for fil in filtro %}
-{% with name=fil.num %}
-{% endfor %}
+{% with name="World" greeting="Hello" %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,7 +44,9 @@
                 <td>{{ item.data_leitura }}</td>
                 <td>{{ item.io6 }}</td>
 <!-- 		        <td> {{ filtro }} </td> -->
-                <td>{{name}}
+                {% for fil in filtro %}
+                <th>{{ fil.sum }}</th>
+                {% endfor %}
                 <td>teste</td>
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
@@ -59,7 +58,6 @@
                 <td>{{ parametro_b_float }}</td>
             </tr>
             {% endfor %}
-            {% endwith %}
         </table>
     </body>
 </html>
