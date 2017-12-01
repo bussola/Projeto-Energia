@@ -92,7 +92,8 @@ def printa(request):
     .extra(select={'day': 'date(data_leitura)'})
     .values('day')
     .annotate(sum=Sum('io6')))
-    filtro = soma_5_min.sum
+    for soma in soma_5_min:
+        filtro = soma_5_min.sum
 
     qnt_dados = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
