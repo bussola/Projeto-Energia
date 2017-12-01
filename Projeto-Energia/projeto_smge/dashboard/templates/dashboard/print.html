@@ -19,7 +19,8 @@
     <body>
         <table style="width:100%">
             <tr>
-                <th>Data</th>
+                <th>Dia</th>
+                <th>Hora</th>
                 {% for tran in transdutores %}
                 <th>{{ tran.nome_io6 }}</th>
                 {% endfor %}
@@ -40,6 +41,7 @@
             </tr>
             {% for item in coletas %}
             <tr>
+                <td>{{ item.data_leitura.day }}</td>
                 <td>{{ item.data_leitura.time }}</td>
                 <td>{{ item.io6 }}</td>
 		        <td> {{ filtro|div:qnt }} </td>
