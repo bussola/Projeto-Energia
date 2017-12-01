@@ -93,7 +93,7 @@ def printa(request):
     .values('day')
     .annotate(sum=Sum('io6')))
     for f in soma_5_min:
-        filtro = f['sum']
+        filtro = f['sum'] #pega o dicionario sum
 
     qnt_dados = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)
@@ -101,7 +101,7 @@ def printa(request):
     .values('day')
     .annotate(contador=Count('io6')))
     for q in qnt_dados:
-        qnt = q['contador']
+        qnt = q['contador'] #pega o dicionario contador
 
     coletas = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
