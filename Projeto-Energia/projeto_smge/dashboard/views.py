@@ -94,6 +94,8 @@ def printa(request):
     .annotate(sum=Sum('io6')))
     for f in soma_5_min:
         filtro = f['sum'] #pega o dicionario sum
+        
+    #adicionar no BD Coleta na coluna media_io6
 
     qnt_dados = (Coleta.objects
     .filter(data_leitura__gt=last_5_min)

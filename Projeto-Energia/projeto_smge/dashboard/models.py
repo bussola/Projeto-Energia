@@ -134,6 +134,7 @@ class Servico(models.Model):
 class Coleta(models.Model):
     data_leitura = models.DateTimeField(null=True)  # TODO: MUdar isso depois
     io6 = models.FloatField(max_length=255, null=True)
+    media_io6 = models.FloatField(max_length=255, null=True)
     io7 = models.FloatField(max_length=255, null=True)
     io8 = models.FloatField(max_length=255, null=True)
     io9 = models.FloatField(max_length=255, null=True)
