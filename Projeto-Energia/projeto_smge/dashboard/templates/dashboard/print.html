@@ -42,10 +42,7 @@
             <tr>
                 <td>{{ item.data_leitura }}</td>
                 <td>{{ item.io6 }}</td>
-<!-- 		        <td> {{ filtro }} </td> -->
-                {% for fil in filtro %}
-                <th>{{ fil.sum }}</th>
-                {% endfor %}
+		        <td> {{ filtro }} </td>
                 <td>teste</td>
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
