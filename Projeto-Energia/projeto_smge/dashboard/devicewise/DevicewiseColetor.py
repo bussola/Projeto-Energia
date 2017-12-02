@@ -53,7 +53,9 @@ class DevicewiseColetor(object):
                     coleta.media_io6 = filtro/qnt #Media dos ultimos 5 minutos
 
                     coleta.io7 = dados['io_7']['value']
+                    coleta.calculo_io7 = dados['io_7']['value']*t.parametro_a+t.parametro_b
                     coleta.io8 = dados['io_8']['value']
+                    coleta.calculo_io8 = dados['io_8']['value']*t.parametro_a+t.parametro_b
                     coleta.io9 = dados['io_9']['value']
                     coleta.io10 = dados['io_10']['value']
                     coleta.io11 = dados['io_11']['value']
