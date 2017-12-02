@@ -86,14 +86,15 @@ def graficos(request):
 def printa(request):
     #filtro = Coleta.objects.all().annotate(Count('io6'))
     #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
-    last_5_min = datetime.now() - timedelta(seconds=5*60)
-    soma_5_min = (Coleta.objects
-    .filter(data_leitura__gt=last_5_min)
-    .extra(select={'day': 'date(data_leitura)'})
-    .values('day')
-    .annotate(sum=Sum('io6')))
-    for f in soma_5_min:
-        filtro = f['sum'] #pega o dicionario sum
+    
+    # last_5_min = datetime.now() - timedelta(seconds=5*60)
+    # soma_5_min = (Coleta.objects
+    # .filter(data_leitura__gt=last_5_min)
+    # .extra(select={'day': 'date(data_leitura)'})
+    # .values('day')
+    # .annotate(sum=Sum('io6')))
+    # for f in soma_5_min:
+    #     filtro = f['sum'] #pega o dicionario sum
 
     #media_io6 = Coleta.objects.values_list('media_io6', flat=True).filter(id_transdutor=1).order_by('-id').first() #TODO ajustar id_transdutor=1
 
