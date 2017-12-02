@@ -131,8 +131,8 @@ def printa(request):
         'io6_name': io6_name,
         'io7_name': io7_name,
         'io8_name': io8_name,
-        'parametro_a': parametro_a_float,
-        'parametro_b': parametro_b_float,
+        'parametro_a': parametro_a,
+        'parametro_b': parametro_b,
         'data': data,
     }
     return render(request, 'dashboard/print.html', context)
