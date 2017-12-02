@@ -29,6 +29,7 @@ class DevicewiseColetor(object):
                     coleta.data_leitura = dados['lastCommunication']
                     coleta.io6 = dados['io_6']['value']
 
+                    #Calcula a soma dos valores dos ultimos 5 minutos do io6
                     last_5_min = datetime.now() - timedelta(seconds=5*60)
                     soma_5_min = (Coleta.objects
                     .filter(data_leitura__gt=last_5_min)
@@ -37,7 +38,16 @@ class DevicewiseColetor(object):
                     .annotate(sum=Sum('io6')))
                     for f in soma_5_min:
                         filtro = f['sum'] #pega o dicionario sum
-                    coleta.media_io6 = filtro
+                    #Calcula a qnt de valores dos ultimos 5 minutos do io6
+                    qnt_dados = (Coleta.objects
+                    .filter(data_leitura__gt=last_5_min)
+                    .extra(select={'day': 'date(data_leitura)'})
+                    .values('day')
+                    .annotate(contador=Count('io6')))
+                    for q in qnt_dados:
+                        qnt = q['contador'] #pega o dicionario contador
+
+                    coleta.media_io6 = filtro/qnt #Media dos ultimos 5 minutos
 
                     coleta.io7 = dados['io_7']['value']
                     coleta.io8 = dados['io_8']['value']
