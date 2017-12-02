@@ -47,7 +47,8 @@
                 <td>{{ item.data_leitura.year }}</td>
                 <td>{{ item.data_leitura.time }}</td>
                 <td>{{ item.io6 }}</td>
-		        <td> {{ filtro|div:qnt }} </td>
+<!-- 		        <td> {{ filtro|div:qnt }} </td> -->
+                <td>{{media_io6}}</td>
         	    <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 <td>{{ item.io7 }}</td>
                 <td>{{ item.io7|mul:parametro_a_float|addition:parametro_b_float }} </td>
