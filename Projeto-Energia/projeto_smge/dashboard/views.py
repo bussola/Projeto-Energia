@@ -95,7 +95,7 @@ def printa(request):
     for f in soma_5_min:
         filtro = f['sum'] #pega o dicionario sum
 
-    media_io6 = Coleta.objects.values_list('media_io6', flat=True).filter(chave_api="hab0001").order_by('-id').first()
+    media_io6 = Coleta.objects.values_list('media_io6', flat=True).filter(id_transdutor=1).order_by('-id').first() #TODO ajustar id_transdutor=1
 
         
     #adicionar no BD Coleta na coluna media_io6
