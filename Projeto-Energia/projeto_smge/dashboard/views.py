@@ -122,7 +122,7 @@ def printa(request):
     context = {
         #'media_io6': media_io6,
         #'qnt': qnt,
-        'filtro': filtro,
+        #'filtro': filtro,
         'transdutores': transdutores,
         'parametro_a_float': parametro_a_float,
         'parametro_b_float': parametro_b_float,
