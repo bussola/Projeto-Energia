@@ -101,13 +101,13 @@ def printa(request):
         
     #adicionar no BD Coleta na coluna media_io6
 
-    qnt_dados = (Coleta.objects
-    .filter(data_leitura__gt=last_5_min)
-    .extra(select={'day': 'date(data_leitura)'})
-    .values('day')
-    .annotate(contador=Count('io6')))
-    for q in qnt_dados:
-        qnt = q['contador'] #pega o dicionario contador
+    # qnt_dados = (Coleta.objects
+    # .filter(data_leitura__gt=last_5_min)
+    # .extra(select={'day': 'date(data_leitura)'})
+    # .values('day')
+    # .annotate(contador=Count('io6')))
+    # for q in qnt_dados:
+    #     qnt = q['contador'] #pega o dicionario contador
 
     coletas = Coleta.objects.all().order_by('-id')
     transdutores = Transdutor.objects.filter(chave_api="hab0001")
