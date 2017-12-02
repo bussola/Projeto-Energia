@@ -118,8 +118,8 @@ def printa(request):
     parametros = Transdutor.objects.all().filter(chave_api="hab0001").order_by('-id')
     #parametro_a = Transdutor.objects.values_list('parametro_a', flat=True).filter(chave_api="hab0001").order_by('-id').first()
     #parametro_b = Transdutor.objects.values_list('parametro_b', flat=True).filter(chave_api="hab0001").order_by('-id').first()
-    parametro_a_float = float(parametro_a.replace(',','.'))
-    parametro_b_float = float(parametro_b.replace(',','.'))
+    #parametro_a_float = float(parametro_a.replace(',','.'))
+    #parametro_b_float = float(parametro_b.replace(',','.'))
     # io6 = Coleta.objects.values_list('io6', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
