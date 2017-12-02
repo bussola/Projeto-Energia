@@ -86,7 +86,7 @@ def graficos(request):
 def printa(request):
     #filtro = Coleta.objects.all().annotate(Count('io6'))
     #filtro = Employee.objects.values('department__dept_name', 'level__level_name').annotate(employee_count = Count('id')).order_by('-employee_count')[:1]
-    
+
     # last_5_min = datetime.now() - timedelta(seconds=5*60)
     # soma_5_min = (Coleta.objects
     # .filter(data_leitura__gt=last_5_min)
@@ -121,7 +121,7 @@ def printa(request):
     data = Coleta.objects.values_list('data_leitura', flat=True).filter(id_transdutor=1).order_by('-id')[:10]
     context = {
         #'media_io6': media_io6,
-        'qnt': qnt,
+        #'qnt': qnt,
         'filtro': filtro,
         'transdutores': transdutores,
         'parametro_a_float': parametro_a_float,
