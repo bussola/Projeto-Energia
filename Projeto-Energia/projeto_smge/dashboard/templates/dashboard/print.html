@@ -25,14 +25,10 @@
                 <th>Hora</th>
                 <th>{{ io6_name|first }}</th>
                 <th>{{ io6_name|first }} - Calculado</th>
-                <th> Media - 5 min </th>
-                {% for tran in transdutores %}
-                <th>{{ tran.nome_io7 }}</th>
-                {% endfor %}
+                <th>{{ io6_name|first }} Media - 5 min </th>
+                <th>{{ io7_name|first_io7 }}</th>
                 <th>{{ io7_name|first }} - Calculado</th>
-                {% for tran in transdutores %}
-                <th>{{ tran.nome_io8 }}</th>
-                {% endfor %}
+                <th>{{ io8_name|first }}</th>
                 <th>{{ io8_name|first }} - Calculado</th>
                 <th>Soma das IOs</th>
                 <th>Parametro A</th>
