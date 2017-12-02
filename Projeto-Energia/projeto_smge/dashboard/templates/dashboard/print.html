@@ -23,11 +23,9 @@
                 <th>Mês</th>
                 <th>Ano</th>
                 <th>Hora</th>
-
                 <th>{{ io6_name|first }}</th>
-
-		        <th> Media - 5 min </th>
                 <th>{{ io6_name|first }} - Calculado</th>
+                <th> Media - 5 min </th>
                 {% for tran in transdutores %}
                 <th>{{ tran.nome_io7 }}</th>
                 {% endfor %}
@@ -47,7 +45,6 @@
                 <td>{{ item.data_leitura.year }}</td>
                 <td>{{ item.data_leitura.time }}</td>
                 <td>{{ item.io6 }}</td>
-                <td>{{ item.media_io6 }}</td>
 
                 {% if item.io6 == 0 %}
                     <td>0</td>
@@ -55,6 +52,7 @@
                     <td>{{ item.io6|mul:parametro_a_float|addition:parametro_b_float }} </td>
                 {% endif %}
 
+                <td>{{ item.media_io6 }}</td>
                 <td>{{ item.io7 }}</td>
 
                 {% if item.io7 == 0 %}
