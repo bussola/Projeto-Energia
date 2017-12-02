@@ -3,7 +3,7 @@ from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 from dashboard.models import Transdutor, Coleta, User
 from datetime import datetime
 from datetime import timedelta
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 class DevicewiseColetor(object):
     api = None
