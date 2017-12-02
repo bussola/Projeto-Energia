@@ -41,30 +41,12 @@
                 <td>{{ item.data_leitura.year }}</td>
                 <td>{{ item.data_leitura.time }}</td>
                 <td>{{ item.io6 }}</td>
-
-                {% if item.io6 == 0 %}
-                    <td>0</td>
-                {% else %}
-                    <td>{{ item.calculo_io6 }} </td>
-                {% endif %}
-
+                <td>{{ item.calculo_io6 }} </td>
                 <td>{{ item.media_io6 }}</td>
                 <td>{{ item.io7 }}</td>
-
-                {% if item.io7 == 0 %}
-                    <td>0</td>
-                {% else %}
-                    <td>{{ item.calculo_io7 }} </td>
-                {% endif %}
-
+                <td>{{ item.calculo_io7 }} </td>
                 <td>{{ item.io8 }}</td>
-
-                {% if item.io8 == 0 %}
-                    <td>0</td>
-                {% else %}
-                    <td>{{ item.calculo_io8 }} </td>
-                {% endif %}
-
+                <td>{{ item.calculo_io8 }} </td>
                 <td>{{ item.io6|addition:item.io7|addition:item.io8 }}</td>
                 <td>{{ parametro_a }}</td>
                 <td>{{ parametro_b }}</td>
