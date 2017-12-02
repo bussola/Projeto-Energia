@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from dashboard.devicewise.DevicewiseHttp import DevicewiseHttp
 from dashboard.models import Transdutor, Coleta, User
-
+from datetime import datetime
+from datetime import timedelta
+from django.db.models import Sum
 
 class DevicewiseColetor(object):
     api = None
@@ -26,6 +28,17 @@ class DevicewiseColetor(object):
                     coleta = Coleta()
                     coleta.data_leitura = dados['lastCommunication']
                     coleta.io6 = dados['io_6']['value']
+
+                    last_5_min = datetime.now() - timedelta(seconds=5*60)
+                    soma_5_min = (Coleta.objects
+                    .filter(data_leitura__gt=last_5_min)
+                    .extra(select={'day': 'date(data_leitura)'})
+                    .values('day')
+                    .annotate(sum=Sum('io6')))
+                    for f in soma_5_min:
+                        filtro = f['sum'] #pega o dicionario sum
+                    coleta.media_io6 = filtro
+
                     coleta.io7 = dados['io_7']['value']
                     coleta.io8 = dados['io_8']['value']
                     coleta.io9 = dados['io_9']['value']
