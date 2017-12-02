@@ -36,7 +36,7 @@ class DevicewiseColetor(object):
                     .filter(data_leitura__gt=last_5_min)
                     .extra(select={'day': 'date(data_leitura)'})
                     .values('day')
-                    .annotate(sum=Sum('io6')))
+                    .annotate(sum=Sum('calculo_io6')))
                     for f in soma_5_min:
                         filtro = f['sum'] #pega o dicionario sum
                     #Calcula a qnt de valores dos ultimos 5 minutos do io6
@@ -44,7 +44,7 @@ class DevicewiseColetor(object):
                     .filter(data_leitura__gt=last_5_min)
                     .extra(select={'day': 'date(data_leitura)'})
                     .values('day')
-                    .annotate(contador=Count('io6')))
+                    .annotate(contador=Count('calculo_io6')))
                     for q in qnt_dados:
                         qnt = q['contador'] #pega o dicionario contador
 
