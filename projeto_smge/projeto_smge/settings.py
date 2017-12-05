@@ -25,11 +25,16 @@ SECRET_KEY = 'yp^0acn$=^h+-jc--55e96r_am1yc06*+@ww_v4g3b*)0az+l)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['50.116.54.138', '127.0.0.1']
+ALLOWED_HOSTS = ['50.116.54.138', '127.0.0.1', 'www.acessos-smge.com.br', 'acessos-smge.com.br']
+
+ADMINS = [('Bussola','vbussola@yahoo.com')]
+MANAGERS = ADMINS
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'mathfilters',
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +75,26 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'projeto_smge.wsgi.application'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# using smtp email server
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'esavecontato@gmail.com'
+EMAIL_HOST_PASSWORD = 'chicogay'
+
+
+# #EMAIL_HOST = 'smtp.acessos-smge.com.br'
+# EMAIL_HOST = 'mail.acessos-smge.com.br'
+# EMAIL_HOST_USER = 'no-reply@acessos-smge.com.br'
+# EMAIL_HOST_PASSWORD = 'Energia123'
+EMAIL_PORT = 587
+
+
+# CRONJOBS = [
+#     ('*/5 * * * *', 'dashboard.cron.coletar_leituras')
+# ]
 
 
 # Database
@@ -89,6 +116,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_USER_MODEL = 'dashboard.User'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -104,13 +132,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SESSION_COOKIE_AGE = 60 * 60 * 2
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -122,8 +151,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/dashboard/static/'
-
 LOGIN_URL = '/login'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'dashboard/static/')
+STATIC_URL = '/dashboard/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'dashboard/static/'),
+  BASE_DIR
+)
+

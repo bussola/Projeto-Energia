@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>e-Save Consultoria | Dashboard</title>
+    <title>SMGE</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -42,11 +43,11 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="{% url 'dashboard:index' %}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><img src="http://www.terradossoftwares.com/images/esave/e-save-logo.png"></span>
+            <span class="logo-mini"><img src="{% static 'dashboard/img/smge/smge-xs.png' %}"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img src="http://www.terradossoftwares.com/images/esave/esave-logo.png"></span>
+            <span class="logo-lg"><img src="{% static 'dashboard/img/smge/smge.png' %}"></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -244,15 +245,12 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<!-- <img src="avatars/{{ user.get_profile.avatar }}">
-							<img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt=""> -->
-							<img src="/{{ user.avatar }}" class="user-image" alt="">                            
-							
-                            <span class="hidden-xs">
+                            <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="user-image" alt=""> -->
+                            <img src="/{{ user.avatar }}" class="user-image" alt="">
+			    <span class="hidden-xs">
 								{% if user.is_authenticated %}
 									{% if user.first_name %}
-										<p>{{user.first_name}}</p>
-										{{ user.avatar }}
+										{{user.first_name}}
 									{% else %}
 										{{ user.get_username }}
 									{% endif %}
@@ -265,18 +263,32 @@
                             <!-- User image -->
                             <li class="user-header">
                                 <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
-								<img src="{{ user.avatar }}" class="user-image" alt="">
-
+				<img src="/{{ user.avatar }}" class="user-image" alt="">
                                 <p>
-                                    {{user.first_name}} {{user.last_name}}
-                                    <small>Membro desde Nov. 2015</small>
+                                {% if user.is_authenticated %}
+                                    {% if user.first_name %}
+                                        {{user.first_name}}
+                                    {% else %}
+                                        {{ user.get_username }}
+                                    {% endif %}
+                                {% else %}
+                                    Faça o login
+                                {% endif %}
+                                    <small>Membro desde <br />
+                                    {% if user.is_authenticated %}
+                                        {{user.date_joined}}
+                                    {% else %}
+                                            Faça o login
+                                    {% endif %}
+
+                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Opcao 1</a>
+                                        <a href="password_reset">Alterar senha</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Opcao 2</a>
@@ -293,7 +305,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                    <a href="{% url 'dashboard:logout' %}" class="btn btn-default btn-flat">Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -313,9 +325,9 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-					<img src="{{ user.avatar }}">
-					<!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
-                </div>
+                    <!-- <img src="{% static 'dashboard/img/user.jpg' %}" class="img-circle" alt=""> -->
+                    <img src="/{{ user.avatar }}" class="user-image" alt="">
+		</div>
                 <div class="pull-left info">
                     {% if user.is_authenticated %}
 						{% if user.first_name %}
@@ -330,6 +342,7 @@
                 </div>
             </div>
             <!-- search form -->
+            <!--
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Procurar...">
@@ -339,6 +352,7 @@
               </span>
                 </div>
             </form>
+            -->
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -427,7 +441,7 @@
         <div class="pull-right hidden-xs">
             <b>Versão</b> 2017.10.1
         </div>
-        <strong>&copy; <a href="https://www.e-saveconsultoria.com.br">e-Save Consultoria</a></strong>
+        <strong>&copy; <a href="http://www.e-saveconsultoria.com.br" target="_blank">e-Save Consultoria</a></strong>
     </footer>
 
     <!-- Control Sidebar -->
@@ -552,7 +566,9 @@
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
                     <h3 class="control-sidebar-heading">Configurações Gerais</h3>
-
+                    <p>
+                    <a href="password_reset">Alterar senha</a>
+                    </p>
                     <div class="form-group">
                         <label class="control-sidebar-subheading">
                             Reportar uso do painel
@@ -655,9 +671,14 @@
 <!-- AdminLTE App -->
 <script src="{% static 'dashboard/dist/js/adminlte.min.js' %}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'dashboard/dist/js/pages/dashboard.js' %}"></script>
+<!--<script src="{% static 'dashboard/dist/js/pages/dashboard.js' %}"></script>-->
 <!-- AdminLTE for demo purposes -->
-<script src="{% static 'dashboard/dist/js/demo.js' %}"></script>
+<script src="{% static 'dashboard/dist/js/graficos.js' %}"></script>
 </body>
 </html>
 
+<script>
+$(document).ready(function() {
+	{% block jquery %} {% endblock %}
+})
+</script>
