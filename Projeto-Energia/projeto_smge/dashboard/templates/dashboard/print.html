@@ -1,0 +1,61 @@
+{% load mathfilters %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+            }
+            th {
+                text-align: left;
+            }
+        </style>
+    </head>
+
+    <body>
+        <table style="width:100%">
+            <tr>
+                <th>Dia</th>
+                <th>Mês</th>
+                <th>Ano</th>
+                <th>Hora</th>
+                <th>{{ io6_name|first }}</th>
+                <th>{{ io6_name|first }} - Calculado</th>
+                <th>{{ io6_name|first }} Media - 5 min </th>
+                <th>{{ io7_name|first }}</th>
+                <th>{{ io7_name|first }} - Calculado</th>
+                <th>{{ io7_name|first }} Media - 5 min </th>
+                <th>{{ io8_name|first }}</th>
+                <th>{{ io8_name|first }} - Calculado</th>
+                <th>{{ io8_name|first }} Media - 5 min </th>
+                <th>Soma das IOs</th>
+                <th>Parametro A</th>
+                <th>Parametro B</th>
+            </tr>
+            {% for item in coletas %}
+            <tr>
+                <td>{{ item.data_leitura.day }}</td>
+                <td>{{ item.data_leitura.month }}</td>
+                <td>{{ item.data_leitura.year }}</td>
+                <td>{{ item.data_leitura.time }}</td>
+                <td>{{ item.io6 }}</td>
+                <td>{{ item.calculo_io6 }} </td>
+                <td>{{ item.media_io6 }}</td>
+                <td>{{ item.io7 }}</td>
+                <td>{{ item.calculo_io7 }} </td>
+                <td>{{ item.media_io7 }}</td>
+                <td>{{ item.io8 }}</td>
+                <td>{{ item.calculo_io8 }} </td>
+                <td>{{ item.media_io8 }}</td>
+                <td>{{ item.io6|addition:item.io7|addition:item.io8 }}</td>
+                <td>{{ parametro_a }}</td>
+                <td>{{ parametro_b }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

@@ -1,0 +1,130 @@
+{% extends 'dashboard/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="content">
+      <!-- CONSUMO MENSAL --------------------------------------------- -->
+      <div class="col-md-8">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Consumo Mensal (Kwa)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartConsumoMensal" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- CONSUMO MENSAL - POR SETOR --------------------------------------------- -->
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Consumo por Setor (Kwa)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartConsumoMensalSetores" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- GASTO MENSAL --------------------------------------------- -->
+    <div class="col-md-8">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Gasto Mensal (R$)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartGastoMensal" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- GASTO MENSAL POR SETOR --------------------------------------------- -->
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading text-center">
+                <h3 class="text-primary">Gasto Mensal por Setor (R$)</h3>
+            </div>
+            <div class="panel-body">
+                <div id="chartGastoMensalSetores" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block jquery %}
+
+
+// ---------------------------------- CONSUMO MENSAL
+mes_atual = new Date().getMonth() + 1;
+$.ajax({
+    method: 'GET',
+    url: '/consumo_mensal/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    data: { mes: mes_atual },
+    success: function(data) {
+        console.log(data);
+        xKey = 'Dia';
+        yKeys = ['Consumo'];
+        labels = ['Consumo'];
+        bindBar('chartConsumoMensal', data, xKey, yKeys, labels);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
+});
+
+
+// ---------------------------------- CONSUMO MENSAL P/ SETOR
+$.ajax({
+    method: 'GET',
+    url: '/consumomensalporsetores/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        bindDonut('chartConsumoMensalSetores', data);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
+});
+
+
+// ---------------------------------- GASTO MENSAL
+$.ajax({
+    method: 'GET',
+    url: '/gasto_mensal/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        xKey = 'Dia';
+        yKeys = ['Valor'];
+        labels = ['Valor'];
+        bindLines('chartGastoMensal', data, xKey, yKeys, labels);
+    },
+    error: function(error_data){
+        console.log(error_data);
+    }
+});
+
+
+// ---------------------------------- GASTO MENSAL P/ SETOR
+$.ajax({
+    method: 'GET',
+    url: '/gastomensalporsetores/',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+        bindDonut('chartGastoMensalSetores', data);
+        console.log('Gasto mensal por setores [OK]');
+        console.log(data);
+    },
+    error: function(error_data){
+        console.log('Gasto mensal por setores [ERRO]');
+        console.log(error_data);
+    }
+});
+
+{% endblock %}
